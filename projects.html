@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Md. Faiyaz Abdullah Sayeedi - Projects</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/pace.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- js -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/pace.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+</head>
+
+<body class="graph-paper">
+    <!-- navigation -->
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-8 col-xs-10">
+                    <div class="logo">
+                        <h1 style="margin-top: 1.5rem;">
+                            <a href="index.html">
+                                <img src="img/icon.png" alt="" class="logo-icon">
+                                Md. Faiyaz Abdullah <span>Sayeedi</span>
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-8 hidden-sm hidden-xs">
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a href="index.html">About</a></li>
+                            <li><a href="publications.html">Publications</a></li>
+                            <li><a href="datasets.html">Datasets</a></li>
+                            <li><span class="current">Projects</span></li>
+                            <li><a href="curriculumvita.html">CV</a></li>
+                            <li><a href="honor_achievement.html">Awards</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-sm-4 col-xs-2 hidden-md hidden-lg" style="text-align: right !important;">
+                    <button type="button" id="trigger-overlay" class="menu-toggle">
+                        <span class="ion-navicon"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="content-body">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-note">Selected engineering and research projects, with source code and demos.</p>
+
+            <div class="row">
+                <main class="col-md-12" style="margin-top: 2rem;">
+                    <input type="text" id="searchInput" class="pub-search" placeholder="Search by name, topic or technology…" autocomplete="off">
+                    <p id="projEmpty" class="pub-empty" style="display:none;">No projects match that search.</p>
+
+                    <div id="projectContainer" style="min-height: 45vh; margin-top: 3rem;">
+                        <ul class="pub-list">
+                            <li class="pub-item">
+                                <span class="pub-id">[P1]</span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://www.linkedin.com/posts/mdfaiyazabdullahsayeedi_none-of-us-are-happy-about-the-current-situation-activity-7222284206310113281-yTe6?utm_source=share&utm_medium=member_desktop&rcm=ACoAADYgKjsBi_dYWdWVmwxmS6RVK-hst-tqmps" target="_blank" rel="noopener">MosquitoMiner: A Light Weight Rover for Detecting and Eliminating Mosquito Breeding Sites</a></h3>
+                                    <p class="pub-abstract">MosquitoMiner is an innovative solution designed to autonomously detect and eliminate mosquito breeding sites, reducing the risk of mosquito-borne diseases. This project combines advanced robotics, computer vision, and machine learning to create a light-weight rover that can navigate through various terrains, identify potential breeding grounds, and apply targeted treatments to disrupt the mosquito lifecycle.</p>
+                                    <p class="pub-venue">Robotics &middot; Computer Vision &middot; AI for Public Health</p>
+                                    <ul class="pub-links">
+                                        <li><a href="https://youtu.be/UL2HmXnCcOk" target="_blank" rel="noopener">video</a></li>
+                                        <li><a href="https://arxiv.org/abs/2409.08078" target="_blank" rel="noopener">paper</a></li>
+                                        <li><a href="https://youtu.be/VjfZQ4wg4fo?si=WBSI9N_KYwfv1qSb" target="_blank" rel="noopener">presentation</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah/MosquitoMiner" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[P2]</span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://github.com/faiyazabdullah/ProMaS" target="_blank" rel="noopener">ProMaS: Centralized Platform for Modern Project Management</a></h3>
+                                    <p class="pub-abstract">ProMaS is a centralized database platform designed to modernize project management workflows by supporting resource allocation, budget control, and progress tracking. It streamlines operations for teams of all sizes while enhancing collaboration and communication among stakeholders, making it a powerful tool for delivering projects on time and within scope.</p>
+                                    <p class="pub-venue">Project Management &middot; Collaboration Tools</p>
+                                    <ul class="pub-links">
+                                        <li><a href="https://github.com/faiyazabdullah/ProMaS" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[P3]</span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://github.com/faiyazabdullah/UIU-Health-Management-System" target="_blank" rel="noopener">UIU Healthcare Management</a></h3>
+                                    <p class="pub-abstract">UIU Healthcare Management is a streamlined solution for managing healthcare services, featuring appointment booking, prescription handling, and access to hospital locations for UIU students, staff, and faculty members. It integrates real-time GPS data to help users find the nearest hospitals and offers a searchable database of frequently asked health-related questions to improve patient awareness and self-care.</p>
+                                    <p class="pub-venue">Healthcare &middot; Mobile App &middot; GPS Integration</p>
+                                    <ul class="pub-links">
+                                        <li><a href="https://github.com/faiyazabdullah/UIU-Health-Management-System" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[P4]</span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://github.com/TawsifTorabi/MoscProtec" target="_blank" rel="noopener">MoscProtec: AI-Based Platform for Mosquito-Borne Disease Monitoring</a></h3>
+                                    <p class="pub-abstract">MoscProtec is a digital platform that leverages artificial intelligence to collect, analyze, and visualize data related to mosquito-borne diseases. The system also supports automatic identification of mosquito species to guide public awareness campaigns and healthcare response. Designed to assist both researchers and the general public, it contributes to early warning and prevention efforts.</p>
+                                    <p class="pub-venue">Public Health &middot; AI &middot; Mosquito Classification</p>
+                                    <ul class="pub-links">
+                                        <li><a href="https://github.com/TawsifTorabi/MoscProtec" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Contact -->
+            <div class="row">
+                <div class="col-md-12 section" id="contact">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-note">Happy to talk about research, collaborations, or anything in the papers above.
+                        Email is the fastest way to reach me.</p>
+
+                    <div class="contact-block">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="contact-panel">
+                                    <h3>Send a message</h3>
+                                    <form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
+                                        class="contact-form">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" name="name" placeholder="Your name" required>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="email" name="email" placeholder="Your email" required>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="subject" placeholder="Subject" required>
+                                        <textarea name="message" rows="7" placeholder="Your message" required></textarea>
+                                        <button type="submit" class="btn-contact">
+                                            <span class="ion-ios-paperplane"></span>Send Message
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="contact-panel">
+                                    <h3>Contact details</h3>
+                                    <ul class="contact-details">
+                                        <li>
+                                            <span class="ci ion-ios-email"></span>
+                                            <span>
+                                                <span class="cd-label">Email</span>
+                                                <span class="cd-value"><a href="mailto:msayeedi212049@bscse.uiu.ac.bd">msayeedi212049@bscse.uiu.ac.bd</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-email-outline"></span>
+                                            <span>
+                                                <span class="cd-label">Secondary email</span>
+                                                <span class="cd-value"><a href="mailto:faiyazabdullah114708@gmail.com">faiyazabdullah114708@gmail.com</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-telephone"></span>
+                                            <span>
+                                                <span class="cd-label">Phone</span>
+                                                <span class="cd-value"><a href="tel:+8801704054900">+880 1704 054900</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-location"></span>
+                                            <span>
+                                                <span class="cd-label">Location</span>
+                                                <span class="cd-value">Dhaka, Bangladesh</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>Find me online</h3>
+                                    <ul class="profile-links">
+                                        <li><a href="https://scholar.google.com/citations?user=gLTfVpwAAAAJ&hl=en" target="_blank"
+                                                rel="noopener">Google Scholar</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah" target="_blank" rel="noopener">GitHub</a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/in/mdfaiyazabdullahsayeedi/" target="_blank"
+                                                rel="noopener">LinkedIn</a></li>
+                                        <li><a href="https://orcid.org/0009-0007-3079-7806" target="_blank"
+                                                rel="noopener">ORCID</a></li>
+                                        <li><a href="https://www.researchgate.net/profile/Md-Sayeedi" target="_blank"
+                                                rel="noopener">ResearchGate</a></li>
+                                        <li><a href="https://www.facebook.com/faiyazabdullah336908" target="_blank"
+                                                rel="noopener">Facebook</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                            href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub
+                        Pages.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="index.html">About</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="datasets.html">Datasets</a></li>
+                <li><strong>Projects 𝄪</strong></li>
+                <li><a href="curriculumvita.html">Curriculum vitae</a></li>
+                <li><a href="honor_achievement.html">Honor & Achievement</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- whatsapp button -->
+    <!-- <a href="https://wa.me/+8801704054900?text=Hello%20I%20want%20to%20know%20more..." class="whatsapp-float"
+        target="_blank" aria-label="Chat on WhatsApp" style="background-color: rgb(225, 225, 225) !important;">
+        <img src="https://img.icons8.com/ios-filled/50/25D366/whatsapp.png" alt="WhatsApp Chat"
+            title="Reach me on WhatsApp" style="background-color: rgb(225, 225, 225) !important;" />
+    </a> -->
+
+    <script src="js/script.js"></script>
+    <!-- project search -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var search = document.getElementById("searchInput");
+            var empty = document.getElementById("projEmpty");
+            var items = [].slice.call(document.querySelectorAll(".pub-item"));
+
+            items.forEach(function (item) {
+                item.setAttribute("data-haystack", item.textContent.toLowerCase().replace(/\s+/g, " "));
+            });
+
+            search.addEventListener("input", function () {
+                var q = search.value.trim().toLowerCase();
+                var total = 0;
+
+                items.forEach(function (item) {
+                    var hit = !q || item.getAttribute("data-haystack").indexOf(q) !== -1;
+                    item.style.display = hit ? "" : "none";
+                    if (hit) { total++; }
+                });
+
+                empty.style.display = total ? "none" : "block";
+            });
+        });
+    </script>
+</body>
+
+</html>

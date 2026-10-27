@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Md. Faiyaz Abdullah Sayeedi - Publications</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/pace.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- js -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/pace.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+</head>
+
+<body class="graph-paper">
+    <!-- navigation -->
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-8 col-xs-10">
+                    <div class="logo">
+                        <h1 style="margin-top: 1.5rem;">
+                            <a href="index.html">
+                                <img src="img/icon.png" alt="" class="logo-icon">
+                                Md. Faiyaz Abdullah <span>Sayeedi</span>
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-8 hidden-sm hidden-xs">
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a href="index.html">About</a></li>
+                            <li><span class="current">Publications</span></li>
+                            <li><a href="datasets.html">Datasets</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="curriculumvita.html">CV</a></li>
+                            <li><a href="honor_achievement.html">Awards</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-sm-4 col-xs-2 hidden-md hidden-lg" style="text-align: right !important;">
+                    <button type="button" id="trigger-overlay" class="menu-toggle">
+                        <span class="ion-navicon"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-12" style="margin-top: 3rem;">
+                <h2 class="section-title">Publications</h2>
+                <p class="section-note">16 peer-reviewed papers &mdash; 3 journal articles, 8 conference papers and 5 workshop papers. <strong>Bold</strong> marks my name; * marks equal contribution.</p>
+
+
+                    <input type="text" id="searchInput" class="pub-search" placeholder="Search by title, author or venue…" autocomplete="off">
+                    <p id="pubEmpty" class="pub-empty" style="display:none;">No publications match that search.</p>
+
+                    <div id="pubContainer" style="min-height: 55vh; margin-top: 3rem;">
+
+                        <div class="pub-group">
+                            <h3 class="pub-group-title">Journal Articles <span class="count">(3)</span></h3>
+                            <ul class="pub-list">
+                                <li class="pub-item">
+                                    <span class="pub-id">[J1]<span class="pub-tag ieee" tabindex="0" data-venue="IEEE Access, 2025">IEEE Access</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://ieeexplore.ieee.org/document/11036671" target="_blank" rel="noopener">JailbreakTracer: Explainable Detection of Jailbreaking Prompts in LLMs Using Synthetic Data Generation</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Maaz Bin Hossain, Md Kamrul Hassan, Sabrina Afrin, Molla Md Sabit, Md Shohrab Hossain</p>
+                                        <p class="pub-venue">IEEE Access, 2025</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-j1"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://ieeexplore.ieee.org/document/11036671" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/JailbreakTracer" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://www.kaggle.com/datasets/faiyazabdullah/jailbreaktracer-corpus" target="_blank" rel="noopener">dataset</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-j1" hidden>The emergence of Large Language Models (LLMs) has revolutionized natural language processing (NLP), enabling remarkable advancements across various applications. However, these models remain susceptible to adversarial prompts, commonly referred to as jailbreaks, which exploit their vulnerabilities to bypass ethical and safety constraints. These prompts manipulate LLMs to produce harmful or forbidden outputs, posing serious ethical and security challenges. In this study, we propose JailbreakTracer, a novel framework leveraging synthetic data generation and Explainable AI (XAI) to detect and classify jailbreaking prompts. We first construct two comprehensive datasets: a Toxic Prompt Classification Dataset, combining real-world and synthetic jailbreak prompts, and a Forbidden Question Reasoning Dataset, categorizing forbidden queries into 13 distinct scenarios with clear reasoning labels. Synthetic toxic prompts are generated using a fine-tuned GPT model, achieving an attack success rate of 95.1%, effectively addressing the class imbalance. Using transformer-based architectures, we train classifiers that achieved 97.25% accuracy in detecting jailbreak prompts and 100% accuracy in categorizing forbidden questions. Our approach integrates XAI techniques, such as LIME, to ensure interpretability and transparency in the model&rsquo;s predictions. Extensive evaluations demonstrate the efficacy of JailbreakTracer in detecting and reasoning about jailbreak prompts, providing a critical step toward enhancing the safety and accountability of LLMs.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[J2]<span class="pub-tag elsevier" tabindex="0" data-venue="Data in Brief, Elsevier, 2024">Data in Brief</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://www.sciencedirect.com/science/article/pii/S2352340925000630" target="_blank" rel="noopener">ElectroCom61: A Multiclass Dataset for Detection of Electronic Components</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Anas Mohammad Ishfaqul Muktadir Osmani, Taimur Rahman, Jannatul Ferdous Deepti, Raiyan Rahman, Salekul Islam</p>
+                                        <p class="pub-venue">Data in Brief, Elsevier, 2024</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-j2"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://www.sciencedirect.com/science/article/pii/S2352340925000630" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/ElectroCom61" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://data.mendeley.com/datasets/6scy6h8sjz/2" target="_blank" rel="noopener">dataset</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-j2" hidden>In contemporary industrial, robotics, and technical education settings, the efficient detection and sorting of electronic components play a pivotal role in advancing automation and increasing efficiency in these sectors. To address this need, we present &ldquo;ElectroCom61,&rdquo; a comprehensive multi-class object detection dataset encompassing 61 commonly used electronic components. Our dataset, sourced from the electronic components collection at United International University (UIU) in Dhaka, Bangladesh, comprises 2121 meticulously annotated images. We ensured that these images reflect real-world conditions, incorporating varied lighting, backgrounds, distances, and camera angles to bolster the potential machine learning model's robustness. We also divided the dataset into training, validation, and test sets to facilitate deep learning model development. Additionally, we conducted minimal pre-processing to optimise model training and performance. &ldquo;ElectroCom61&rdquo; stands as a valuable asset for developing cutting-edge electronic component detection systems, with far-reaching applications in both education and industry. Its potential applications span from interactive educational tools to e-waste management systems and streamlined inventory management processes in electronic manufacturing and automation.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[J3]<span class="pub-tag mdpi" tabindex="0" data-venue="Applied Sciences, MDPI, 2024">Applied Sciences</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://www.mdpi.com/2076-3417/14/13/5459" target="_blank" rel="noopener">A Comparative Analysis for Optimizing Machine Learning Model Deployment in IoT Devices</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Jannatul Ferdous Deepti, Anas Mohammad Ishfaqul Muktadir Osmani, Taimur Rahman, Safrin Sanzida Islam, Md. Motaharul Islam</p>
+                                        <p class="pub-venue">Applied Sciences, MDPI, 2024</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-j3"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://www.mdpi.com/2076-3417/14/13/5459" target="_blank" rel="noopener">paper</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-j3" hidden>In the intersection of the Internet of Things (IoT) and Machine Learning (ML), the choice between high-level and low-level programming libraries presents a significant dilemma for developers, impacting not only the efficiency and effectiveness of ML models but also their environmental footprint. We have proposed a comprehensive framework to aid in this decision-making process, underpinned by a detailed comparative analysis of both types of libraries on one of the key IoT ML tasks: image classification. We have introduced a novel algorithm designed to calculate the green footprint of ML model training, factoring in execution time, memory utilization, power consumption, and CPU temperature, addressing the urgent need for sustainable ML practices. Through an empirical evaluation of popular libraries such as PyTorch for high-level and Libtorch for low-level development, we have assessed their performance, development efficiency, and hardware compatibility. The culmination of our research is a decision support system that synthesizes the experimental findings to guide developers toward choices that harmonize model performance with environmental sustainability.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="pub-group">
+                            <h3 class="pub-group-title">Conference Papers <span class="count">(8)</span></h3>
+                            <ul class="pub-list">
+                                <li class="pub-item">
+                                    <span class="pub-id">[C1]<span class="pub-tag acl" tabindex="0" data-venue="Findings of the Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)">EMNLP 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2603.21165" target="_blank" rel="noopener">Many Dialects, Many Languages, One Cultural Lens: Evaluating Multilingual VLMs for Bengali Culture Understanding Across Historically Linked Languages and Regional Dialects</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, Nurul Labib Sayeedi*, Shubhashis Roy Dipta, Rubaya Tabassum, Ariful Ekraj Hridoy, Mehraj Mahmood, Mahbub E Sobhani, Md Tarek Hasan, Swakkhar Shatabda <span class="eq">(* indicates equal contribution)</span></p>
+                                        <p class="pub-venue">Findings of the Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c1"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2603.21165" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/BanglaVerse" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://huggingface.co/datasets/FaiyazAbdullah114708/BanglaVerse" target="_blank" rel="noopener">dataset</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c1" hidden>Bangla culture is richly expressed through region, dialect, history, food, politics, media, and everyday visual life, yet it remains underrepresented in multimodal evaluation. To address this gap, we introduce BanglaVerse, a culturally grounded benchmark for evaluating multilingual vision-language models (VLMs) on Bengali culture across historically linked languages and regional dialects. Built from 1,152 manually curated images across nine domains, the benchmark supports visual question answering and captioning, and is expanded into four languages and five Bangla dialects, yielding ~32.2K artifacts. Our experiments show that evaluating only standard Bangla overestimates true model capability: performance drops under dialectal variation, especially for caption generation, while historically linked languages such as Hindi and Urdu retain some cultural meaning but remain weaker for structured reasoning. Across domains, the main bottleneck is missing cultural knowledge rather than visual grounding alone, with knowledge-intensive categories. These findings position BanglaVerse as a more realistic test bed for measuring culturally grounded multimodal understanding under linguistic variation.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C2]<span class="pub-tag acl" tabindex="0" data-venue="Findings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL 2026)">ACL 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2510.07877v1" target="_blank" rel="noopener">Ready to Translate, Not to Represent? Bias and Performance Gaps in Multilingual LLMs Across Language Families and Domains</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, Md Mahbubul Alam*, Subhey Sadi Rahman*, MD. Adnanul Islam*, Jannatul Ferdous Deepty*, Tasnim Mohiuddin, Md. Mofijul Islam, Swakkahr Shatabda <span class="eq">(* indicates equal contribution)</span></p>
+                                        <p class="pub-venue">Findings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL 2026)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c2"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2510.07877v1" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/TranslationTangles" target="_blank" rel="noopener">code &amp; data</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c2" hidden>The rise of Large Language Models (LLMs) has redefined Machine Translation (MT), enabling context-aware and fluent translations across hundreds of languages and textual domains. Despite their remarkable capabilities, LLMs often exhibit uneven performance across language families and specialized domains. Moreover, recent evidence reveals that these models can encode and amplify different biases present in their training data, posing serious concerns for fairness, especially in low-resource languages. To address these gaps, we introduce Translation Tangles, a unified framework and dataset for evaluating the translation quality and fairness of open-source LLMs. Our approach benchmarks 24 bidirectional language pairs across multiple domains using different metrics. We further propose a hybrid bias detection pipeline that integrates rule-based heuristics, semantic similarity filtering, and LLM-based validation. We also introduce a high-quality, bias-annotated dataset based on human evaluations of 1,439 translation-reference pairs.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C3]<span class="pub-tag acl" tabindex="0" data-venue="Findings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2026)">EACL 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2510.14305" target="_blank" rel="noopener">MathMist: A Parallel Multilingual Benchmark Dataset for Mathematical Problem Solving and Reasoning</a></h3>
+                                        <p class="pub-authors">Mahbub E Sobhani, <span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Tasnim Mohiuddin, Md Mofijul Islam, Swakkhar Shatabda</p>
+                                        <p class="pub-venue">Findings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2026)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c3"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2510.14305" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/mahbubhimel/MathMist" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://huggingface.co/datasets/mahbubhimel/MathMist" target="_blank" rel="noopener">dataset</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c3" hidden>Mathematical reasoning remains one of the most challenging domains for large language models (LLMs), requiring not only linguistic understanding but also structured logical deduction and numerical precision. While recent LLMs demonstrate strong general-purpose reasoning abilities, their mathematical competence across diverse languages remains underexplored. Existing benchmarks primarily focus on English or a narrow subset of high-resource languages, leaving significant gaps in assessing multilingual and cross-lingual mathematical reasoning. To address this, we introduce MathMist, a parallel multilingual benchmark for mathematical problem solving and reasoning. MathMist encompasses 2,890 parallel Bangla-English gold standard artifacts, totaling &asymp; 30K aligned question&ndash;answer pairs across thirteen languages, representing an extensive coverage of high-, medium-, and low-resource linguistic settings. The dataset captures linguistic variety, multiple types of problem settings, and solution synthesizing capabilities. We systematically evaluate a diverse suite of models, including open-source small and medium LLMs, proprietary systems, and multilingual-reasoning-focused models under zero-shot, chain-of-thought (CoT), perturbated reasoning, and code-switched reasoning paradigms. Our results reveal persistent deficiencies in LLMs&rsquo; ability to perform consistent and interpretable mathematical reasoning across languages, with pronounced degradation in low-resource settings.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C4]<span class="pub-tag acl" tabindex="0" data-venue="Poster Presentation, 15th Joint Conference on Lexical and Computational Semantics (*SEM 2026), co-located with ACL 2026">*SEM 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://aclanthology.org/2026.starsem-conference.22/" target="_blank" rel="noopener">Can LLMs Solve My Grandma&rsquo;s Riddle? Evaluating Multilingual Large Language Models on Reasoning Traditional Bangla Tricky Riddles</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, Nurul Labib Sayeedi*, Khushnur Binte Jahangir, Swakkhar Shatabda, Sarah Masud Preum <span class="eq">(* indicates equal contribution)</span></p>
+                                        <p class="pub-venue">Poster Presentation, 15th Joint Conference on Lexical and Computational Semantics (*SEM 2026), co-located with ACL 2026</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c4"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://aclanthology.org/2026.starsem-conference.22/" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/Labib1610/BanglaRiddleEval" target="_blank" rel="noopener">code</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c4" hidden>Large Language Models (LLMs) show impressive performance on many NLP benchmarks, yet their ability to reason in figurative, culturally grounded, and low-resource settings remains underexplored. We address this gap for Bangla by introducing BanglaRiddleEval, a benchmark of 1,244 traditional Bangla riddles instantiated across four tasks (4,976 riddle-task artifacts in total). Using an LLM-based pipeline, we generate Chain-of-Thought explanations, semantically coherent distractors, and fine-grained ambiguity annotations, and evaluate a diverse suite of open-source and closed-source models under different prompting strategies. Models achieve moderate semantic overlap on generative QA but low correctness, MCQ accuracy peaks at only about 56% versus an 83.3% human baseline, and ambiguity resolution ranges from roughly 26% to 68%, with high-quality explanations confined to the strongest models. These results show that current LLMs capture some cues needed for Bangla riddle reasoning but remain far from human-level performance, establishing BanglaRiddleEval as a challenging new benchmark for low-resource figurative reasoning.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C5]<span class="pub-tag iclr" tabindex="0" data-venue="Notable (Top 5%), Tiny Papers Track, Oral Presentation, The Twelfth International Conference on Learning Representations (ICLR 2024)">ICLR 2024</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://openreview.net/forum?id=3s4hFx8pYs" target="_blank" rel="noopener">MosquitoFusion: A Multiclass Dataset for Real-Time Detection of Mosquitoes, Swarms, and Breeding Sites Using Deep Learning</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Md Ashiqur Rahman, Fahim Hafiz</p>
+                                        <p class="pub-venue">Notable (Top 5%), Tiny Papers Track, Oral Presentation, The Twelfth International Conference on Learning Representations (ICLR 2024)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c5"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://openreview.net/forum?id=3s4hFx8pYs" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/MosquitoFusion" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://www.kaggle.com/datasets/faiyazabdullah/mosquitofusion-dataset" target="_blank" rel="noopener">dataset</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c5" hidden>In this paper, we present an integrated approach to real-time mosquito detection using our multiclass dataset (MosquitoFusion) containing 1204 diverse images and leverage cutting-edge technologies, specifically computer vision, to automate the identification of Mosquitoes, Swarms, and Breeding Sites. The pre-trained YOLOv8 model, trained on this dataset, achieved a mean Average Precision (mAP@50) of 57.1%, with precision at 73.4% and recall at 50.5%. The integration of Geographic Information Systems (GIS) further enriches the depth of our analysis, providing valuable insights into spatial patterns.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C6]<span class="pub-tag ieee" tabindex="0" data-venue="Oral Presentation, IEEE Region 10 Symposium 2024 (TENSYMP 2024)">TENSYMP 2024</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://ieeexplore.ieee.org/abstract/document/10752222" target="_blank" rel="noopener">MosquitoMiner: A Light Weight Rover for Detecting and Eliminating Mosquito Breeding Sites</a></h3>
+                                        <p class="pub-authors">MD. Adnanul Islam, <span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Jannatul Ferdous Deepti, Shahanur Rahman Bappy, Safrin Sanzida Islam, Fahim Hafiz</p>
+                                        <p class="pub-venue">Oral Presentation, IEEE Region 10 Symposium 2024 (TENSYMP 2024)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c6"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://ieeexplore.ieee.org/abstract/document/10752222" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/MosquitoMiner" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://youtu.be/VjfZQ4wg4fo?si=EnXBxRBhhO32ySQ6" target="_blank" rel="noopener">presentation</a></li>
+                                            <li><a href="https://youtu.be/UL2HmXnCcOk?si=wmeyFCr_HBQmp7KE" target="_blank" rel="noopener">demo</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c6" hidden>In this paper, we present a novel approach to the development and deployment of an autonomous mosquito breeding place detector rover with the object and obstacle detection capabilities to control mosquitoes. Mosquito-borne diseases continue to pose significant health threats globally, with conventional control methods proving slow and inefficient. Amidst rising concerns over the rapid spread of these diseases, there is an urgent need for innovative and efficient strategies to manage mosquito populations and prevent disease transmission. To mitigate the limitations of manual labor and traditional methods, our rover employs autonomous control strategies. Leveraging our own custom dataset, the rover can autonomously navigate along a pre-defined path, identifying and mitigating potential breeding grounds with precision. It then proceeds to eliminate these breeding grounds by spraying a chemical agent, effectively eradicating mosquito habitats. Our project demonstrates the effectiveness that is absent in traditional ways of controlling and safeguarding public health.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C7]<span class="pub-tag ieee" tabindex="0" data-venue="Oral Presentation, 6th International Conference on Electrical Engineering and Information Communication Technology (ICEEICT 2024)">ICEEICT 2024</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://www.researchgate.net/profile/Md-Sayeedi/publication/380823901_BrailleSense_Deep_Learning_for_Braille_Character_Classification/links/66503d8d0b0d2845745498af/BrailleSense-Deep-Learning-for-Braille-Character-Classification.pdf" target="_blank" rel="noopener">BrailleSense: Deep Learning for Braille Character Classification</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Anas Mohammad Ishfaqul Muktadir Osmani, Dewan Md. Farid</p>
+                                        <p class="pub-venue">Oral Presentation, 6th International Conference on Electrical Engineering and Information Communication Technology (ICEEICT 2024)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c7"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://www.researchgate.net/profile/Md-Sayeedi/publication/380823901_BrailleSense_Deep_Learning_for_Braille_Character_Classification/links/66503d8d0b0d2845745498af/BrailleSense-Deep-Learning-for-Braille-Character-Classification.pdf" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/BrailleNet" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://youtu.be/pIBeAQVHl0g?si=nqRBpbaPQZNHD_My" target="_blank" rel="noopener">presentation</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c7" hidden>Individuals with visual impairments face challenges accessing written information. Braille is one of many solutions that only requires the reader to sense the depth of the paper with their hand to comprehend written information without the need to look at the text. However, learning Braille, especially for those losing sight later in life, presents difficulties. This research introduces the BrailleSense system, a technological solution designed to assist visually impaired individuals in learning and utilizing the Braille system effectively. The system features a virtual prototype of hand gloves equipped with a camera, aiming to alleviate challenges associated with Braille pattern memorization. Key contributions include the development of a custom lightweight Convolutional Neural Network (CNN) model for Braille pattern classification coined as the BrailleNet. This model is then deployed on a Raspberry Pi to investigate the feasibility of working with resource-limited portable devices, BrailleNet achieves an impressive accuracy of 97.44% under real-world constraints. The research outlines the conceptual design through a 3D model of the gloves, addressing spatial allocation. Acknowledging challenges in user comfort and alignment, BrailleSense presents a pioneering step towards empowering visually impaired individuals, enhancing literacy, and fostering independence.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[C8]<span class="pub-tag ieee" tabindex="0" data-venue="Oral Presentation, IEEE International Conference on Contemporary Computing and Communications (InC4 2023)">InC4 2023</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://www.researchgate.net/profile/Md-Sayeedi/publication/374629560_Fem-Scale_A_Data-Driven_Approach_for_Quantifying_Degree_of_Individual_Feminism_Perspective/links/653242501d6e8a70703f2a11/Fem-Scale-A-Data-Driven-Approach-for-Quantifying-Degree-of-Individual-Feminism-Perspective.pdf" target="_blank" rel="noopener">Fem-Scale: A Data-Driven Approach for Quantifying Degree of Individual Feminism Perspective</a></h3>
+                                        <p class="pub-authors">Jannatul Ferdous Deepti, <span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Anayatul Ahad Shoikot, Safrin Sanzida Islam, Anika Tasnim Rodela, Akib Zaman</p>
+                                        <p class="pub-venue">Oral Presentation, IEEE International Conference on Contemporary Computing and Communications (InC4 2023)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c8"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://www.researchgate.net/profile/Md-Sayeedi/publication/374629560_Fem-Scale_A_Data-Driven_Approach_for_Quantifying_Degree_of_Individual_Feminism_Perspective/links/653242501d6e8a70703f2a11/Fem-Scale-A-Data-Driven-Approach-for-Quantifying-Degree-of-Individual-Feminism-Perspective.pdf" target="_blank" rel="noopener">paper</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c8" hidden>Abuse of women is widespread in underdeveloped nations like Bangladesh, where women are still afraid to assert their rights, and this trend persists. Even though significant changes are apparent, they have not entirely disappeared from society. On the other hand, there are some negative notions of feminism prevailing in our community. The lack of proper classification of the individual feminism perspective in relevant degrees is a significant concern while developing effective policies against this phenomenon. In this work, we develop a data-driven approach to quantify the degree of the individual feminist standpoint. We collected data from a selected crowd using survey questionnaires and analyzed the responses to segregate the participants into a Fem-Scale with five distinct classes: Sexist, Partial Sexist, Moderate, Feminist, and Radical feminist. We also validated the proposed Fem-Scale with real-life data generating an accuracy of 97.67% and highlighted the critical insights of the qualitative analysis of the collected data. To the best of the authors&rsquo; knowledge, this is the first attempt to introduce the degree of individual feminism standpoint. The proposed method can be beneficial in future research, including justifying the standpoint regarding feminism using public data from an individual&rsquo;s social networking site (SNS).</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="pub-group">
+                            <h3 class="pub-group-title">Workshop Papers <span class="count">(5)</span></h3>
+                            <ul class="pub-list">
+                                <li class="pub-item">
+                                    <span class="pub-id">[W1]<span class="pub-tag acl" tabindex="0" data-venue="Workshop on Bridging Human-Computer Interaction and Natural Language Processing (HCI+NLP), co-located with EMNLP 2025">HCI+NLP 2025</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2510.17726" target="_blank" rel="noopener">Rethinking Search: A Study of University Students&rsquo; Perspectives on Using LLMs and Traditional Search Engines in Academic Problem Solving</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Md. Sadman Haque, Zobaer Ibn Razzaque, Robiul Awoul Robin, Sabila Nawshin</p>
+                                        <p class="pub-venue">Workshop on Bridging Human-Computer Interaction and Natural Language Processing (HCI+NLP), co-located with EMNLP 2025</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-w1"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2510.17726" target="_blank" rel="noopener">paper</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-w1" hidden>With the increasing integration of Artificial Intelligence (AI) in academic problem solving, university students frequently alternate between traditional search engines like Google and large language models (LLMs) for information retrieval. This study explores students&rsquo; perceptions of both tools, emphasizing usability, efficiency, and their integration into academic workflows. Employing a mixed-methods approach, we surveyed 109 students from diverse disciplines and conducted in-depth interviews with 12 participants. Quantitative analyses, including ANOVA and chi-square tests, were used to assess differences in efficiency, satisfaction, and tool preference. Qualitative insights revealed that students commonly switch between GPT and Google: using Google for credible, multi-source information and GPT for summarization, explanation, and drafting. While neither tool proved sufficient on its own, there was a strong demand for a hybrid solution. In response, we developed a prototype, a chatbot embedded within the search interface, that combines GPT&rsquo;s conversational capabilities with Google&rsquo;s reliability to enhance academic research and reduce cognitive load.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[W2]<span class="pub-tag neurips" tabindex="0" data-venue="Poster Presentation, Muslims in ML Workshop (MusIML), co-located with NeurIPS 2024">MusIML 2024</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://openreview.net/forum?id=GNRjyXZmGY" target="_blank" rel="noopener">MIMIC: Multimodal Islamophobic Meme Identification and Classification</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, S M Jishanul Islam*, Sadia Ahmmed*, Sahid Hossain Mustakim*, Swapnil Khandoker*, Syed Tasdid Azam Dhrubo*, Nahid Hossain <span class="eq">(* indicates equal contribution)</span></p>
+                                        <p class="pub-venue">Poster Presentation, Muslims in ML Workshop (MusIML), co-located with NeurIPS 2024</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-w2"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://openreview.net/forum?id=GNRjyXZmGY" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/MIMIC" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://youtu.be/2sLl2bN3oD8?si=zcgVc4cBNU1EhASN" target="_blank" rel="noopener">presentation</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-w2" hidden>Anti-Muslim hate speech has emerged within memes, characterized by context-dependent and rhetorical messages using text and images that seemingly mimic humor but convey Islamophobic sentiments. This work presents a novel dataset and proposes a classifier based on the Vision-and-Language Transformer (ViLT) specifically tailored to identify anti-Muslim hate within memes by integrating both visual and textual representations. Our model leverages joint modal embeddings between meme images and incorporated text to capture nuanced Islamophobic narratives that are unique to meme culture, providing both high detection accuracy and interoperability.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[W3]<span class="pub-tag acl" tabindex="0" data-venue="EACL 2026 Student Research Workshop (SRW)">EACL SRW 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2512.16698" target="_blank" rel="noopener">Do Multi-Agents Solve Better Than Single? Evaluating Agentic Frameworks for Diagram-Grounded Geometry Problem Solving and Reasoning</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, Mahbub E Sobhani*, Mohammad Nehad Alam, Proma Hossain Progga, Swakkhar Shatabda <span class="eq">(* indicates equal contribution)</span></p>
+                                        <p class="pub-venue">EACL 2026 Student Research Workshop (SRW)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-w3"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2512.16698" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/faiyazabdullah/Interpreter-Solver" target="_blank" rel="noopener">code</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-w3" hidden>Diagram-grounded geometry problem solving is a critical benchmark for multimodal large language models (MLLMs), yet the benefits of multi-agent design over single-agent remain unclear. We systematically compare single-agent and multi-agent pipelines on four visual math benchmarks: Geometry3K, MathVerse, OlympiadBench, and We-Math. For open-source models, multi-agent consistently improves performance. For example, Qwen-2.5-VL (7B) gains +6.8 points and Qwen-2.5-VL (32B) gains +3.3 on Geometry3K, and both Qwen-2.5-VL variants see further gains on OlympiadBench and We-Math. In contrast, the closed-source Gemini-2.0-Flash generally performs better in single-agent mode on classic benchmarks, while multi-agent yields only modest improvements on the newer We-Math dataset. These findings show that multi-agent pipelines provide clear benefits for open-source models and can assist strong proprietary systems on newer, less familiar benchmarks, but agentic decomposition is not universally optimal.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[W4]<span class="pub-tag cvf" tabindex="0" data-venue="International Workshop on Vision Intelligence for Real-world Challenges, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPRW 2026)">CVPRW 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2506.14629" target="_blank" rel="noopener">VisText-Mosquito: A Unified Multimodal Benchmark Dataset for Visual Detection, Segmentation, and Textual Reasoning on Mosquito Breeding Sites</a></h3>
+                                        <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, Md. Adnanul Islam*, Md. Asaduzzaman Shuvo, Shahanur Rahman Bappy, Muhammad Ziaur Rahman, Md Asiful Islam, Swakkhar Shatabda <span class="eq">(* indicates equal contribution)</span></p>
+                                        <p class="pub-venue">International Workshop on Vision Intelligence for Real-world Challenges, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPRW 2026)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-w4"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2506.14629" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/adnanul-islam-jisun/VisText-Mosquito" target="_blank" rel="noopener">code</a></li>
+                                            <li><a href="https://data.mendeley.com/datasets/rtsfh7jh7p/2" target="_blank" rel="noopener">dataset</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-w4" hidden>Mosquito-borne diseases pose a major global health risk, requiring early detection and proactive control of breeding sites to prevent outbreaks. In this paper, we present VisText-Mosquito, a multimodal dataset that integrates visual and textual data to support automated detection, segmentation, and explanation for mosquito breeding site analysis. The dataset includes 1,828 annotated images for object detection, 142 images for water surface segmentation, and natural language explanation texts linked to each image. The YOLOv9s model achieves the highest precision of 0.92926 and mAP@50 of 0.92891 for object detection, while YOLOv11n-Seg reaches a segmentation precision of 0.91587 and mAP@50 of 0.79795. For textual explanation generation, we tested a range of large vision-language models (LVLMs) in both zero-shot and few-shot settings. Our fine-tuned Mosquito-LLaMA3-8B model achieved the best results, with a final loss of 0.0028, a BLEU score of 54.7, BERTScore of 0.91, and ROUGE-L of 0.85. This dataset and model framework emphasize the theme &ldquo;Prevention is Better than Cure&rdquo;, showcasing how AI-based detection can proactively address mosquito-borne disease risks.</p>
+                                    </div>
+                                </li>
+                                <li class="pub-item">
+                                    <span class="pub-id">[W5]<span class="pub-tag acl" tabindex="0" data-venue="ACL 2026 Workshop on Multilinguality in the Era of Large Language Models (MeLLM @ ACL 2026)">MeLLM 2026</span></span>
+                                    <div class="pub-body">
+                                        <h3 class="pub-title"><a href="https://arxiv.org/abs/2605.24919" target="_blank" rel="noopener">MultiHaluDet: Multilingual Hallucination Detection via LLM Hidden State Probing</a></h3>
+                                        <p class="pub-authors">Riasad Alvi, Nurul Labib Sayeedi, <span class="me">Md. Faiyaz Abdullah Sayeedi</span></p>
+                                        <p class="pub-venue">ACL 2026 Workshop on Multilinguality in the Era of Large Language Models (MeLLM @ ACL 2026)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-w5"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="https://arxiv.org/abs/2605.24919" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/alvi-uiu/MULTIHALUDET" target="_blank" rel="noopener">code</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-w5" hidden>Hallucinations in Large Language Models (LLMs) represent a critical barrier to their reliable deployment, a vulnerability heavily exacerbated in non-English and resource-constrained contexts. Existing detection approaches that rely on output confidence heuristics or single-layer internal representations frequently fail to capture deep, complex factual inconsistencies across diverse languages. To address this, we introduce MultiHaluDet, a novel three-stage stacking framework that detects multilingual hallucinations by probing the full hidden state trajectories of frozen LLMs without requiring language-specific fine-tuning. Our method extracts sequential features across multiple layers and processes them via a hybrid architecture using multi-scale attention and self-attention pooling. By generating out-of-fold embeddings that feed into a calibrated classical classifier ensemble, MultiHaluDet captures both fine-grained and coarse-grained patterns of factual inconsistency. Extensive experiments demonstrate that our framework achieves state-of-the-art detection performance, reaching up to 98.55% AUROC on the English HaluEval and TriviaQA benchmarks using Mistral-7B and LLaMA2-7B architectures. Crucially, we rigorously evaluate our framework&rsquo;s cross-lingual generalization across high (French), medium (Bangla), and low-resource (Amharic) languages. MultiHaluDet demonstrates exceptional representational robustness, consistently outperforming baselines and successfully transferring hallucination detection capabilities across typologically diverse linguistic tiers.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="pub-group">
+                            <h3 class="pub-group-title">Under Review <span class="count">(8)</span></h3>
+                            <ul class="pub-list">
+                            <li class="pub-item">
+                                <span class="pub-id">[U1]<span class="pub-tag acl pending" tabindex="0" data-venue="Under review &mdash; ACL ARR 2026, August Submission">ACL ARR 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">Time Present and Time Past: Benchmarking Large Language Models on Temporally Evolving Document Understanding</h3>
+                                    <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Mahbub E Sobhani, Fahmid Hasan Chowdhury, Md Adnan Arefeen, Farig Sadeque, Md. Faizul Bari, Swakkhar Shatabda</p>
+                                    <p class="pub-venue">Under review &mdash; ACL ARR 2026, August Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U2]<span class="pub-tag acl pending" tabindex="0" data-venue="Under review &mdash; ACL ARR 2026, August Submission">ACL ARR 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">To What Extent Do Large Language Models Understand Bangla Idioms?</h3>
+                                    <p class="pub-authors">Mousumi Akter, <span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Nurul Labib Sayeedi, Swakkhar Shatabda</p>
+                                    <p class="pub-venue">Under review &mdash; ACL ARR 2026, August Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U3]<span class="pub-tag acl pending" tabindex="0" data-venue="Under review &mdash; ACL ARR 2026, August Submission">ACL ARR 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">EGAL: Evidence-Grounded Multi-Agent Adversarial Learning at Inference Time for Research Ideation</h3>
+                                    <p class="pub-authors">Riasad Alvi, Md. Ahashan Habib, <span class="me">Md. Faiyaz Abdullah Sayeedi</span></p>
+                                    <p class="pub-venue">Under review &mdash; ACL ARR 2026, August Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U4]<span class="pub-tag acl pending" tabindex="0" data-venue="Under review &mdash; ACL ARR 2026, August Submission">ACL ARR 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">BanTMedQA: A Multimodal Benchmark for Open Ended Bangla Medical Question Answering</h3>
+                                    <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Rafid Ahmed, Fariha Anjum Shifa, Mir Sazzat Hossain, Faria Iffat Reshma, Mahbub E Sobhani, Md Fahim, Md Farhad Alam Bhuiyan</p>
+                                    <p class="pub-venue">Under review &mdash; ACL ARR 2026, August Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U5]<span class="pub-tag cvf pending" tabindex="0" data-venue="Under review &mdash; Winter Conference on Applications of Computer Vision (WACV 2027), Round 2 Submission">WACV 2027</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">SafeProbe: Measuring Cross-Modal Validity of Latent Safety Monitors in Vision-Language Models</h3>
+                                    <p class="pub-authors">Riasad Alvi, Md. Ahashan Habib, Md. Asaduzzaman Shuvo, <span class="me">Md. Faiyaz Abdullah Sayeedi</span></p>
+                                    <p class="pub-venue">Under review &mdash; Winter Conference on Applications of Computer Vision (WACV 2027), Round 2 Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U6]<span class="pub-tag cvf pending" tabindex="0" data-venue="Under review &mdash; Winter Conference on Applications of Computer Vision (WACV 2027), Round 2 Submission">WACV 2027</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">Entropy-Gated Dynamic Rectification for Object Hallucination in Large Vision-Language Models</h3>
+                                    <p class="pub-authors">Riasad Alvi, Md. Asaduzzaman Shuvo, Md. Ahashan Habib, <span class="me">Md. Faiyaz Abdullah Sayeedi</span></p>
+                                    <p class="pub-venue">Under review &mdash; Winter Conference on Applications of Computer Vision (WACV 2027), Round 2 Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U7]<span class="pub-tag cvf pending" tabindex="0" data-venue="Under review &mdash; Winter Conference on Applications of Computer Vision (WACV 2027), Round 2 Submission">WACV 2027</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">TrajAD: Modeling Feature Trajectories for Training-Free Few-Shot Visual Anomaly Localization</h3>
+                                    <p class="pub-authors">Riasad Alvi, Md. Ahashan Habib, Md. Asaduzzaman Shuvo, <span class="me">Md. Faiyaz Abdullah Sayeedi</span></p>
+                                    <p class="pub-venue">Under review &mdash; Winter Conference on Applications of Computer Vision (WACV 2027), Round 2 Submission</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[U8]<span class="pub-tag springer pending" tabindex="0" data-venue="Under review &mdash; Artificial Intelligence Review, Springer Nature">AI Review</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title">Therapist and Patient Simulation using Large Language Models in Mental Health: A Survey</h3>
+                                    <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>, Anas Mohammad Ishfaqul Muktadir Osmani, Saddam Mukta, Swakkhar Shatabda, Salekul Islam</p>
+                                    <p class="pub-venue">Under review &mdash; Artificial Intelligence Review, Springer Nature</p>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Contact -->
+            <div class="row">
+                <div class="col-md-12 section" id="contact">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-note">Happy to talk about research, collaborations, or anything in the papers above.
+                        Email is the fastest way to reach me.</p>
+
+                    <div class="contact-block">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="contact-panel">
+                                    <h3>Send a message</h3>
+                                    <form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
+                                        class="contact-form">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" name="name" placeholder="Your name" required>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="email" name="email" placeholder="Your email" required>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="subject" placeholder="Subject" required>
+                                        <textarea name="message" rows="7" placeholder="Your message" required></textarea>
+                                        <button type="submit" class="btn-contact">
+                                            <span class="ion-ios-paperplane"></span>Send Message
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="contact-panel">
+                                    <h3>Contact details</h3>
+                                    <ul class="contact-details">
+                                        <li>
+                                            <span class="ci ion-ios-email"></span>
+                                            <span>
+                                                <span class="cd-label">Email</span>
+                                                <span class="cd-value"><a href="mailto:msayeedi212049@bscse.uiu.ac.bd">msayeedi212049@bscse.uiu.ac.bd</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-email-outline"></span>
+                                            <span>
+                                                <span class="cd-label">Secondary email</span>
+                                                <span class="cd-value"><a href="mailto:faiyazabdullah114708@gmail.com">faiyazabdullah114708@gmail.com</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-telephone"></span>
+                                            <span>
+                                                <span class="cd-label">Phone</span>
+                                                <span class="cd-value"><a href="tel:+8801704054900">+880 1704 054900</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-location"></span>
+                                            <span>
+                                                <span class="cd-label">Location</span>
+                                                <span class="cd-value">Dhaka, Bangladesh</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>Find me online</h3>
+                                    <ul class="profile-links">
+                                        <li><a href="https://scholar.google.com/citations?user=gLTfVpwAAAAJ&hl=en" target="_blank"
+                                                rel="noopener">Google Scholar</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah" target="_blank" rel="noopener">GitHub</a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/in/mdfaiyazabdullahsayeedi/" target="_blank"
+                                                rel="noopener">LinkedIn</a></li>
+                                        <li><a href="https://orcid.org/0009-0007-3079-7806" target="_blank"
+                                                rel="noopener">ORCID</a></li>
+                                        <li><a href="https://www.researchgate.net/profile/Md-Sayeedi" target="_blank"
+                                                rel="noopener">ResearchGate</a></li>
+                                        <li><a href="https://www.facebook.com/faiyazabdullah336908" target="_blank"
+                                                rel="noopener">Facebook</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                            href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub
+                        Pages.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="index.html">About</a></li>
+                <li><strong>Publications 𝄪</strong></li>
+                <li><a href="datasets.html">Datasets</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="curriculumvita.html">Curriculum vitae</a></li>
+                <li><a href="honor_achievement.html">Honor & Achievement</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- whatsapp button -->
+    <!-- <a href="https://wa.me/+8801704054900?text=Hello%20I%20want%20to%20know%20more..." class="whatsapp-float"
+        target="_blank" aria-label="Chat on WhatsApp" style="background-color: rgb(225, 225, 225) !important;">
+        <img src="https://img.icons8.com/ios-filled/50/25D366/whatsapp.png" alt="WhatsApp Chat"
+            title="Reach me on WhatsApp" style="background-color: rgb(225, 225, 225) !important;" />
+    </a> -->
+
+    <script src="js/script.js"></script>
+    <!-- publication search -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var search = document.getElementById("searchInput");
+            var empty = document.getElementById("pubEmpty");
+            var groups = [].slice.call(document.querySelectorAll(".pub-group"));
+            var items = [].slice.call(document.querySelectorAll(".pub-item"));
+
+            items.forEach(function (item) {
+                item.setAttribute("data-haystack", item.textContent.toLowerCase().replace(/\s+/g, " "));
+                item.setAttribute("data-hit", "1");
+            });
+
+            search.addEventListener("input", function () {
+                var q = search.value.trim().toLowerCase();
+                var total = 0;
+
+                items.forEach(function (item) {
+                    var hit = !q || item.getAttribute("data-haystack").indexOf(q) !== -1;
+                    item.style.display = hit ? "" : "none";
+                    item.setAttribute("data-hit", hit ? "1" : "0");
+                    if (hit) { total++; }
+                });
+
+                groups.forEach(function (group) {
+                    var visible = group.querySelectorAll('.pub-item[data-hit="1"]').length;
+                    group.style.display = visible ? "" : "none";
+                });
+
+                empty.style.display = total ? "none" : "block";
+            });
+        });
+    </script>
+    <!-- abstract toggle -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var toggles = [].slice.call(document.querySelectorAll(".pub-toggle"));
+
+            toggles.forEach(function (btn) {
+                var panel = document.getElementById(btn.getAttribute("aria-controls"));
+                var label = btn.querySelector(".pub-toggle-label");
+                var base = label ? label.textContent : "";
+                if (!panel) { return; }
+
+                btn.addEventListener("click", function () {
+                    var open = btn.getAttribute("aria-expanded") === "true";
+                    btn.setAttribute("aria-expanded", open ? "false" : "true");
+                    panel.hidden = open;
+                    label.textContent = open ? base : "hide " + base;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

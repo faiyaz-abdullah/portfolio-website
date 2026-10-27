@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Md. Faiyaz Abdullah Sayeedi - Datasets</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/pace.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- js -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/pace.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+</head>
+
+<body class="graph-paper">
+    <!-- navigation -->
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-8 col-xs-10">
+                    <div class="logo">
+                        <h1 style="margin-top: 1.5rem;">
+                            <a href="index.html">
+                                <img src="img/icon.png" alt="" class="logo-icon">
+                                Md. Faiyaz Abdullah <span>Sayeedi</span>
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-8 hidden-sm hidden-xs">
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a href="index.html">About</a></li>
+                            <li><a href="publications.html">Publications</a></li>
+                            <li><span class="current">Datasets</span></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="curriculumvita.html">CV</a></li>
+                            <li><a href="honor_achievement.html">Awards</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-sm-4 col-xs-2 hidden-md hidden-lg" style="text-align: right !important;">
+                    <button type="button" id="trigger-overlay" class="menu-toggle">
+                        <span class="ion-navicon"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="content-body">
+        <div class="container">
+            <h2 class="section-title">Datasets</h2>
+            <p class="section-note">Public datasets and benchmarks released with my papers.</p>
+            <input type="text" id="searchInput" class="pub-search" placeholder="Search by name, topic or source…" autocomplete="off">
+            <p id="dsEmpty" class="pub-empty" style="display:none;">No datasets match that search.</p>
+
+            <div id="dsContainer" style="min-height: 45vh; margin-top: 3rem;">
+                        <ul class="pub-list">
+                            <li class="pub-item">
+                                <span class="pub-id">[D1]<span class="pub-tag acl" tabindex="0" data-venue="Hugging Face &middot; Vision-Language, Multilingual, Cultural Understanding &middot; Released with EMNLP 2026">EMNLP 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://huggingface.co/datasets/FaiyazAbdullah114708/BanglaVerse" target="_blank" rel="noopener">BanglaVerse: A Cultural Benchmark for Multilingual Vision-Language Models Across Bengali Dialects</a></h3>
+                                    <p class="pub-venue">Hugging Face &middot; Vision-Language, Multilingual, Cultural Understanding &middot; Released with EMNLP 2026</p>
+                                    <ul class="pub-links">
+                                        <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-d1"><span class="pub-toggle-label">details</span></button></li>
+                                        <li><a href="https://huggingface.co/datasets/FaiyazAbdullah114708/BanglaVerse" target="_blank" rel="noopener">dataset</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah/BanglaVerse" target="_blank" rel="noopener">code</a></li>
+                                        <li><a href="https://arxiv.org/abs/2603.21165" target="_blank" rel="noopener">paper</a></li>
+                                    </ul>
+                                    <p class="pub-abstract" id="abs-d1" hidden>BanglaVerse benchmarks how multilingual vision&ndash;language models understand Bengali culture across historically linked languages and regional dialects. It pairs culturally grounded imagery with questions written in multiple dialects, making it possible to measure where VLMs succeed on surface-level recognition but fail on cultural reasoning. Released alongside the EMNLP 2026 Findings paper.</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[D2]<span class="pub-tag acl" tabindex="0" data-venue="Hugging Face &middot; Mathematical Reasoning, Multilingual, Benchmark &middot; Released with EACL 2026">EACL 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://huggingface.co/datasets/mahbubhimel/MathMist" target="_blank" rel="noopener">MathMist: A Parallel Multilingual Benchmark for Mathematical Problem Solving and Reasoning</a></h3>
+                                    <p class="pub-venue">Hugging Face &middot; Mathematical Reasoning, Multilingual, Benchmark &middot; Released with EACL 2026</p>
+                                    <ul class="pub-links">
+                                        <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-d2"><span class="pub-toggle-label">details</span></button></li>
+                                        <li><a href="https://huggingface.co/datasets/mahbubhimel/MathMist" target="_blank" rel="noopener">dataset</a></li>
+                                        <li><a href="https://github.com/mahbubhimel/MathMist" target="_blank" rel="noopener">code</a></li>
+                                        <li><a href="https://arxiv.org/abs/2510.14305" target="_blank" rel="noopener">paper</a></li>
+                                    </ul>
+                                    <p class="pub-abstract" id="abs-d2" hidden>MathMist is a parallel multilingual benchmark for mathematical problem solving and reasoning. Because the problems are aligned across languages, it isolates the effect of language from the effect of mathematical difficulty, exposing reasoning gaps that appear only outside English. Released alongside the EACL 2026 Findings paper.</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[D3]<span class="pub-tag cvf" tabindex="0" data-venue="Mendeley Data &middot; Multimodal, Object Detection, Segmentation &middot; Released with CVPRW 2026">CVPRW 2026</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://data.mendeley.com/datasets/rtsfh7jh7p/2" target="_blank" rel="noopener">VisText-Mosquito: A Unified Multimodal Dataset for Detection, Segmentation and Textual Reasoning</a></h3>
+                                    <p class="pub-venue">Mendeley Data &middot; Multimodal, Object Detection, Segmentation &middot; Released with CVPRW 2026</p>
+                                    <ul class="pub-links">
+                                        <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-d3"><span class="pub-toggle-label">details</span></button></li>
+                                        <li><a href="https://data.mendeley.com/datasets/rtsfh7jh7p/2" target="_blank" rel="noopener">dataset</a></li>
+                                        <li><a href="https://github.com/adnanul-islam-jisun/VisText-Mosquito" target="_blank" rel="noopener">code</a></li>
+                                        <li><a href="https://arxiv.org/abs/2506.14629" target="_blank" rel="noopener">paper</a></li>
+                                    </ul>
+                                    <p class="pub-abstract" id="abs-d3" hidden>VisText-Mosquito unifies three tasks over mosquito breeding sites in a single dataset: object detection, segmentation, and natural-language reasoning about why a site is a breeding risk. Pairing pixel-level annotation with textual explanation lets models be evaluated on perception and justification together rather than in isolation.</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[D4]<span class="pub-tag elsevier" tabindex="0" data-venue="Mendeley Data &middot; Computer Vision, Electronics, Multi-Class &middot; Released with Data in Brief, Elsevier">Data in Brief</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://data.mendeley.com/datasets/6scy6h8sjz/2" target="_blank" rel="noopener">ElectroCom61: A Multiclass Dataset for Detection of Electronic Components</a></h3>
+                                    <p class="pub-venue">Mendeley Data &middot; Computer Vision, Electronics, Multi-Class &middot; Released with Data in Brief, Elsevier</p>
+                                    <ul class="pub-links">
+                                        <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-d4"><span class="pub-toggle-label">details</span></button></li>
+                                        <li><a href="https://data.mendeley.com/datasets/6scy6h8sjz/2" target="_blank" rel="noopener">dataset</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah/ElectroCom61" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                    <p class="pub-abstract" id="abs-d4" hidden>ElectroCom61 is a curated dataset comprising 2,121 annotated images of 61 different electronic components collected from the Electronic Lab Support Room at United International University (UIU). It is designed to train and evaluate machine learning models for real-time component detection. Images were captured from multiple angles under diverse lighting and background conditions to reflect real-world variability. Each image was standardized through auto-orientation and resized to 640×640 pixels. The dataset is split into training (70%), validation (20%), and test (10%) sets to support robust evaluation.</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[D5]<span class="pub-tag iclr" tabindex="0" data-venue="Kaggle &middot; Computer Vision, Object Detection, Mosquito Dataset &middot; Released with ICLR 2024">ICLR 2024</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://www.kaggle.com/datasets/faiyazabdullah/mosquitofusion-dataset" target="_blank" rel="noopener">MosquitoFusion: A Multiclass Dataset for Real-Time Mosquito Detection</a></h3>
+                                    <p class="pub-venue">Kaggle &middot; Computer Vision, Object Detection, Mosquito Dataset &middot; Released with ICLR 2024</p>
+                                    <ul class="pub-links">
+                                        <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-d5"><span class="pub-toggle-label">details</span></button></li>
+                                        <li><a href="https://www.kaggle.com/datasets/faiyazabdullah/mosquitofusion-dataset" target="_blank" rel="noopener">dataset</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah/MosquitoFusion" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                    <p class="pub-abstract" id="abs-d5" hidden>The <strong>MosquitoFusion</strong> dataset features 1,204 expertly curated and annotated images aimed at advancing real-time mosquito detection systems. The data is split into training (87%), validation (8%), and test (5%) subsets. Preprocessing includes auto-orientation and resizing to 640×640 pixels, with a strict filter to exclude unannotated samples. The dataset is further enhanced using data augmentation techniques such as flipping, cropping, rotation, and grayscale conversion to boost robustness and generalizability. This high-quality dataset was accepted at <strong>ICLR 2024 (Tiny Papers Track)</strong> as an invited oral presentation in the “Notable” category.</p>
+                                </div>
+                            </li>
+                            <li class="pub-item">
+                                <span class="pub-id">[D6]<span class="pub-tag ieee" tabindex="0" data-venue="Kaggle &middot; LLM Safety, Prompt Classification, Synthetic Data, Toxicity Detection &middot; Released with IEEE Access">IEEE Access</span></span>
+                                <div class="pub-body">
+                                    <h3 class="pub-title"><a href="https://www.kaggle.com/datasets/faiyazabdullah/jailbreaktracer-corpus" target="_blank" rel="noopener">JailbreakTracer Corpus: Datasets for Toxic Prompt and Forbidden Question Classification</a></h3>
+                                    <p class="pub-venue">Kaggle &middot; LLM Safety, Prompt Classification, Synthetic Data, Toxicity Detection &middot; Released with IEEE Access</p>
+                                    <ul class="pub-links">
+                                        <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-d6"><span class="pub-toggle-label">details</span></button></li>
+                                        <li><a href="https://www.kaggle.com/datasets/faiyazabdullah/jailbreaktracer-corpus" target="_blank" rel="noopener">dataset</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah/JailbreakTracer" target="_blank" rel="noopener">code</a></li>
+                                    </ul>
+                                    <p class="pub-abstract" id="abs-d6" hidden>The <strong>JailbreakTracer Corpus</strong> contains two curated datasets for analyzing and classifying prompts that aim to bypass the safety mechanisms of large language models (LLMs). (1) Toxic Prompt Classification Dataset: Consists of 16,029 non-toxic and 1,952 toxic prompts initially. After synthetic augmentation using GPT, the dataset expanded to 37,333 toxic and 16,053 non-toxic prompts—addressing class imbalance and enabling robust training of LLM safety classifiers. (2) Forbidden Question Reasoning Dataset: Designed for reasoning-based classification of unethical prompts across 13 distinct categories, including Hate Speech, Malware, Economic Harm, Pornography, Legal Opinion, and more. Each class includes 8,250 samples for balanced multi-class modeling.</p>
+                                </div>
+                            </li>
+                        </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Contact -->
+            <div class="row">
+                <div class="col-md-12 section" id="contact">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-note">Happy to talk about research, collaborations, or anything in the papers above.
+                        Email is the fastest way to reach me.</p>
+
+                    <div class="contact-block">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="contact-panel">
+                                    <h3>Send a message</h3>
+                                    <form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
+                                        class="contact-form">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" name="name" placeholder="Your name" required>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="email" name="email" placeholder="Your email" required>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="subject" placeholder="Subject" required>
+                                        <textarea name="message" rows="7" placeholder="Your message" required></textarea>
+                                        <button type="submit" class="btn-contact">
+                                            <span class="ion-ios-paperplane"></span>Send Message
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="contact-panel">
+                                    <h3>Contact details</h3>
+                                    <ul class="contact-details">
+                                        <li>
+                                            <span class="ci ion-ios-email"></span>
+                                            <span>
+                                                <span class="cd-label">Email</span>
+                                                <span class="cd-value"><a href="mailto:msayeedi212049@bscse.uiu.ac.bd">msayeedi212049@bscse.uiu.ac.bd</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-email-outline"></span>
+                                            <span>
+                                                <span class="cd-label">Secondary email</span>
+                                                <span class="cd-value"><a href="mailto:faiyazabdullah114708@gmail.com">faiyazabdullah114708@gmail.com</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-telephone"></span>
+                                            <span>
+                                                <span class="cd-label">Phone</span>
+                                                <span class="cd-value"><a href="tel:+8801704054900">+880 1704 054900</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-location"></span>
+                                            <span>
+                                                <span class="cd-label">Location</span>
+                                                <span class="cd-value">Dhaka, Bangladesh</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>Find me online</h3>
+                                    <ul class="profile-links">
+                                        <li><a href="https://scholar.google.com/citations?user=gLTfVpwAAAAJ&hl=en" target="_blank"
+                                                rel="noopener">Google Scholar</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah" target="_blank" rel="noopener">GitHub</a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/in/mdfaiyazabdullahsayeedi/" target="_blank"
+                                                rel="noopener">LinkedIn</a></li>
+                                        <li><a href="https://orcid.org/0009-0007-3079-7806" target="_blank"
+                                                rel="noopener">ORCID</a></li>
+                                        <li><a href="https://www.researchgate.net/profile/Md-Sayeedi" target="_blank"
+                                                rel="noopener">ResearchGate</a></li>
+                                        <li><a href="https://www.facebook.com/faiyazabdullah336908" target="_blank"
+                                                rel="noopener">Facebook</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                            href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub
+                        Pages.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="overlay overlay-hugeinc">
+        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+        <nav>
+            <ul>
+                <li><a href="index.html">About</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><strong>Datasets 𝄪</strong></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="curriculumvita.html">Curriculum vitae</a></li>
+                <li><a href="honor_achievement.html">Honor & Achievement</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- whatsapp button -->
+    <!-- <a href="https://wa.me/+8801704054900?text=Hello%20I%20want%20to%20know%20more..." class="whatsapp-float"
+        target="_blank" aria-label="Chat on WhatsApp" style="background-color: rgb(225, 225, 225) !important;">
+        <img src="https://img.icons8.com/ios-filled/50/25D366/whatsapp.png" alt="WhatsApp Chat"
+            title="Reach me on WhatsApp" style="background-color: rgb(225, 225, 225) !important;" />
+    </a> -->
+
+    <script src="js/script.js"></script>
+    <!-- dataset search -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var search = document.getElementById("searchInput");
+            var empty = document.getElementById("dsEmpty");
+            var items = [].slice.call(document.querySelectorAll(".pub-item"));
+
+            items.forEach(function (item) {
+                item.setAttribute("data-haystack", item.textContent.toLowerCase().replace(/\s+/g, " "));
+            });
+
+            search.addEventListener("input", function () {
+                var q = search.value.trim().toLowerCase();
+                var total = 0;
+
+                items.forEach(function (item) {
+                    var hit = !q || item.getAttribute("data-haystack").indexOf(q) !== -1;
+                    item.style.display = hit ? "" : "none";
+                    if (hit) { total++; }
+                });
+
+                empty.style.display = total ? "none" : "block";
+            });
+        });
+    </script>
+    <!-- abstract toggle -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var toggles = [].slice.call(document.querySelectorAll(".pub-toggle"));
+
+            toggles.forEach(function (btn) {
+                var panel = document.getElementById(btn.getAttribute("aria-controls"));
+                var label = btn.querySelector(".pub-toggle-label");
+                var base = label ? label.textContent : "";
+                if (!panel) { return; }
+
+                btn.addEventListener("click", function () {
+                    var open = btn.getAttribute("aria-expanded") === "true";
+                    btn.setAttribute("aria-expanded", open ? "false" : "true");
+                    panel.hidden = open;
+                    label.textContent = open ? base : "hide " + base;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
