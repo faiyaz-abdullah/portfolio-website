@@ -1,74 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Md. Faiyaz Abdullah Sayeedi - CV</title>
-    <link rel="icon" type="image/png" href="img/icon.png">
-
-    <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Md. Faiyaz Abdullah Sayeedi - CV</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
 
     <!-- css -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
     <link rel="stylesheet" href="css/pace.css">
     <link rel="stylesheet" href="css/custom.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- js -->
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/pace.min.js"></script>
-    <script src="js/modernizr.custom.js"></script>
 </head>
 
 <body class="graph-paper">
-    <!-- navigation -->
+    <!-- header -->
     <div class="container">
         <header id="site-header">
-            <div class="row">
-                <div class="col-md-4 col-sm-8 col-xs-10">
-                    <div class="logo">
-                        <h1 style="margin-top: 1.5rem;">
-                            <a href="index.html">
-                                <img src="img/icon.png" alt="" class="logo-icon">
-                                Md. Faiyaz Abdullah <span>Sayeedi</span>
-                            </a>
-                        </h1>
-                    </div>
-                </div>
-                <div class="col-md-8 hidden-sm hidden-xs">
-                    <nav class="site-nav">
-                        <ul>
-                            <li><a href="index.html">About</a></li>
-                            <li><a href="publications.html">Publications</a></li>
-                            <li><a href="datasets.html">Datasets</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><span class="current">CV</span></li>
-                            <li><a href="honor_achievement.html">Awards</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-sm-4 col-xs-2 hidden-md hidden-lg" style="text-align: right !important;">
-                    <button type="button" id="trigger-overlay" class="menu-toggle">
-                        <span class="ion-navicon"></span>
-                    </button>
-                </div>
-            </div>
+            <a class="site-brand" href="index.html">
+                <img src="img/icon.png" alt="" class="logo-icon">
+                Md. Faiyaz Abdullah <span>Sayeedi</span>
+            </a>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="datasets.html">Datasets</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><span class="current">CV</span></li>
+                    <li><a href="honor_achievement.html">Awards</a></li>
+                </ul>
+            </nav>
+            <button type="button" id="trigger-overlay" class="menu-toggle" aria-label="Open menu"
+                aria-controls="site-menu" aria-expanded="false">
+                <span class="ion-navicon"></span>
+            </button>
         </header>
     </div>
 
     <div class="content-body">
         <div class="container">
             <div class="row">
-                <main class="col-md-12" style="margin-top: 3rem;">
+                <main class="col-md-12">
                 <h2 class="section-title">Curriculum Vitae</h2>
 
                 <p class="section-note">Last updated August 2026. A PDF version is available below.</p>
 
                 <p class="cv-lead">
-                    <strong>Research Interest:</strong> Natural Language Processing, Multilingualism, Responsible AI, and
+                    <strong>Research Interest:</strong> Natural Language Processing, Multilingualism, Knowledge Representation, and
                     Multimodal Learning.
                 </p>
 
@@ -77,7 +61,7 @@
                         rel="noopener" class="btn-cv">Download CV (PDF)</a>
                 </div>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Education</h2>
+                <h2 class="section-title">Education</h2>
 
                 <ul class="timeline">
                     <li>
@@ -88,7 +72,7 @@
                     </li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Work Experience</h2>
+                <h2 class="section-title">Work Experience</h2>
 
                 <ul class="timeline">
                     <li class="tl-current">
@@ -130,7 +114,7 @@
                     </li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Publications</h2>
+                <h2 class="section-title">Publications</h2>
                 <p class="section-note">16 peer-reviewed papers. <strong>Bold</strong> marks my name; * marks equal contribution.</p>
 
                 <div class="pub-group">
@@ -325,7 +309,7 @@
                     <li class="pub-item">
                         <span class="pub-id">[W4]</span>
                         <div class="pub-body">
-                            <h3 class="pub-title"><a href="https://arxiv.org/abs/2506.14629" target="_blank" rel="noopener">VisText-Mosquito: A Unified Multimodal Benchmark Dataset for Visual Detection, Segmentation, and Textual Reasoning on Mosquito Breeding Sites</a></h3>
+                            <h3 class="pub-title"><a href="https://arxiv.org/abs/2506.14629" target="_blank" rel="noopener">VisText-Mosquito: A Unified Multimodal Dataset for Visual Detection, Segmentation, and Textual Explanation on Mosquito Breeding Sites</a></h3>
                             <p class="pub-authors"><span class="me">Md. Faiyaz Abdullah Sayeedi</span>*, Md. Adnanul Islam*, Md. Asaduzzaman Shuvo, Shahanur Rahman Bappy, Muhammad Ziaur Rahman, Md Asiful Islam, Swakkhar Shatabda <span class="eq">(* equal contribution)</span></p>
                             <p class="pub-venue">Vision Intelligence for Real-world Challenges Workshop, CVPRW 2026</p>
                             <ul class="pub-links">
@@ -350,7 +334,7 @@
                     </ul>
                 </div>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Selected Projects</h2>
+                <h2 class="section-title">Selected Projects</h2>
 
                 <ul class="interest-grid">
                     <li>
@@ -367,7 +351,7 @@
                     </li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Academic Service</h2>
+                <h2 class="section-title">Academic Service</h2>
 
                 <ul class="interest-grid">
                     <li>
@@ -384,7 +368,7 @@
                     </li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Awards &amp; Honors</h2>
+                <h2 class="section-title">Awards &amp; Honors</h2>
                 <p class="section-note">Selected recognitions &mdash; the <a href="honor_achievement.html">full list is here</a>.</p>
 
                 <ul class="cv-list">
@@ -396,7 +380,7 @@
                     <li><strong>Champion</strong> &mdash; CSE Project Show Summer 2024, Spring 2024 and Fall 2022, UIU</li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Skills</h2>
+                <h2 class="section-title">Skills</h2>
 
                 <dl class="skill-list">
                     <div class="skill-row">
@@ -425,7 +409,7 @@
                     </div>
                 </dl>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">References</h2>
+                <h2 class="section-title">References</h2>
 
                 <ul class="interest-grid">
                     <li>
@@ -531,30 +515,28 @@
 
     </div>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer id="site-footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
-                            href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub
-                        Pages.</p>
-                </div>
-            </div>
+            <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub Pages.</p>
         </div>
     </footer>
 
-    <!-- Mobile Menu -->
-    <div class="overlay overlay-hugeinc">
-        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
-        <nav>
+    <button type="button" id="back-to-top" aria-label="Back to top"><span class="ion-chevron-up"></span></button>
+
+    <!-- mobile menu -->
+    <div class="overlay" id="site-menu">
+        <button type="button" class="overlay-close" aria-label="Close menu"><span class="ion-ios-close-empty"></span></button>
+        <nav aria-label="Mobile">
             <ul>
                 <li><a href="index.html">About</a></li>
                 <li><a href="publications.html">Publications</a></li>
                 <li><a href="datasets.html">Datasets</a></li>
                 <li><a href="projects.html">Projects</a></li>
-                <li><strong>Curriculum vitae 𝄪</strong></li>
-                <li><a href="honor_achievement.html">Honor & Achievement</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><span class="current">CV</span></li>
+                <li><a href="honor_achievement.html">Awards</a></li>
             </ul>
         </nav>
     </div>
@@ -567,8 +549,6 @@
     </a> -->
 
     <script src="js/script.js"></script>
-    <!-- jQuery and JS logic -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </body>
 
 </html>

@@ -1,152 +1,132 @@
-var searchvisible = 0;
-
-$("#search-menu").click(function(e){ 
-    //This stops the page scrolling to the top on a # link.
-    e.preventDefault();
-
-    var val = $('#search-icon');
-    if(val.hasClass('ion-ios-search-strong')){
-        val.addClass('ion-ios-close-empty');
-        val.removeClass('ion-ios-search-strong');
-    }
-    else{
-         val.removeClass('ion-ios-close-empty');
-        val.addClass('ion-ios-search-strong');
-    }
-    
-    
-    if (searchvisible ===0) {
-        //Search is currently hidden. Slide down and show it.
-        $("#search-form").slideDown(200);
-        $("#s").focus(); //Set focus on the search input field.
-        searchvisible = 1; //Set search visible flag to visible.
-    } 
-
-    else {
-        //Search is currently showing. Slide it back up and hide it.
-        $("#search-form").slideUp(200);
-        searchvisible = 0;
-    }
-});
-
-/*!
- * classie - class helper functions
- * from bonzo https://github.com/ded/bonzo
- * 
- * classie.has( elem, 'my-class' ) -> true/false
- * classie.add( elem, 'my-new-class' )
- * classie.remove( elem, 'my-unwanted-class' )
- * classie.toggle( elem, 'my-class' )
+/*
+ * Site behaviour, shared by every page. Plain JavaScript, no dependencies.
+ * Each block only runs when its elements are on the page.
+ *
+ *   1. Mobile menu
+ *   2. Back-to-top button
+ *   3. List search (publications, datasets, projects)
+ *   4. Abstract / details toggles
+ *   5. Blog: reading progress and contents highlight
  */
+(function () {
+    'use strict';
 
-/*jshint browser: true, strict: true, undef: true */
-/*global define: false */
+    // 1. Mobile menu
+    var menu = document.querySelector('.overlay');
+    var openButton = document.getElementById('trigger-overlay');
 
-( function( window ) {
+    if (menu && openButton) {
+        var closeButton = menu.querySelector('.overlay-close');
 
-'use strict';
+        var setMenu = function (open) {
+            menu.classList.toggle('open', open);
+            document.body.classList.toggle('menu-open', open);
+            openButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
 
-// class helper functions from bonzo https://github.com/ded/bonzo
-
-function classReg( className ) {
-  return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
-}
-
-// classList support for class management
-// altho to be fair, the api sucks because it won't accept multiple classes at once
-var hasClass, addClass, removeClass;
-
-if ( 'classList' in document.documentElement ) {
-  hasClass = function( elem, c ) {
-    return elem.classList.contains( c );
-  };
-  addClass = function( elem, c ) {
-    elem.classList.add( c );
-  };
-  removeClass = function( elem, c ) {
-    elem.classList.remove( c );
-  };
-}
-else {
-  hasClass = function( elem, c ) {
-    return classReg( c ).test( elem.className );
-  };
-  addClass = function( elem, c ) {
-    if ( !hasClass( elem, c ) ) {
-      elem.className = elem.className + ' ' + c;
-    }
-  };
-  removeClass = function( elem, c ) {
-    elem.className = elem.className.replace( classReg( c ), ' ' );
-  };
-}
-
-function toggleClass( elem, c ) {
-  var fn = hasClass( elem, c ) ? removeClass : addClass;
-  fn( elem, c );
-}
-
-var classie = {
-  // full names
-  hasClass: hasClass,
-  addClass: addClass,
-  removeClass: removeClass,
-  toggleClass: toggleClass,
-  // short names
-  has: hasClass,
-  add: addClass,
-  remove: removeClass,
-  toggle: toggleClass
-};
-
-// transport
-if ( typeof define === 'function' && define.amd ) {
-  // AMD
-  define( classie );
-} else {
-  // browser global
-  window.classie = classie;
-}
-
-})( window );
-
-(function() {
-    var triggerBttn = document.getElementById( 'trigger-overlay' ),
-        overlay = document.querySelector( 'div.overlay' ),
-        closeBttn = overlay.querySelector( 'button.overlay-close' );
-        transEndEventNames = {
-            'WebkitTransition': 'webkitTransitionEnd',
-            'MozTransition': 'transitionend',
-            'OTransition': 'oTransitionEnd',
-            'msTransition': 'MSTransitionEnd',
-            'transition': 'transitionend'
-        },
-        transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
-        support = { transitions : Modernizr.csstransitions };
-
-    function toggleOverlay() {
-        if( classie.has( overlay, 'open' ) ) {
-            classie.remove( overlay, 'open' );
-            classie.add( overlay, 'close' );
-            var onEndTransitionFn = function( ev ) {
-                if( support.transitions ) {
-                    if( ev.propertyName !== 'visibility' ) return;
-                    this.removeEventListener( transEndEventName, onEndTransitionFn );
-                }
-                classie.remove( overlay, 'close' );
-            };
-            if( support.transitions ) {
-                overlay.addEventListener( transEndEventName, onEndTransitionFn );
-            }
-            else {
-                onEndTransitionFn();
-            }
+        openButton.addEventListener('click', function () { setMenu(true); });
+        if (closeButton) {
+            closeButton.addEventListener('click', function () { setMenu(false); });
         }
-        else if( !classie.has( overlay, 'close' ) ) {
-            classie.add( overlay, 'open' );
-        }
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { setMenu(false); }
+        });
     }
 
-    triggerBttn.addEventListener( 'click', toggleOverlay );
-    closeBttn.addEventListener( 'click', toggleOverlay );
+    // 2. Back-to-top button
+    var toTop = document.getElementById('back-to-top');
+
+    if (toTop) {
+        var updateToTop = function () {
+            toTop.classList.toggle('show', window.pageYOffset > 400);
+        };
+        window.addEventListener('scroll', updateToTop, { passive: true });
+        toTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        updateToTop();
+    }
+
+    // 3. List search: <input data-filter="#list" data-filter-empty="#emptyMessage">
+    [].forEach.call(document.querySelectorAll('[data-filter]'), function (input) {
+        var scope = document.querySelector(input.getAttribute('data-filter'));
+        var empty = document.querySelector(input.getAttribute('data-filter-empty'));
+        if (!scope) { return; }
+
+        var items = [].slice.call(scope.querySelectorAll('.pub-item'));
+        var groups = [].slice.call(scope.querySelectorAll('.pub-group'));
+
+        items.forEach(function (item) {
+            item.setAttribute('data-haystack', item.textContent.toLowerCase().replace(/\s+/g, ' '));
+        });
+
+        input.addEventListener('input', function () {
+            var q = input.value.trim().toLowerCase();
+            var total = 0;
+
+            items.forEach(function (item) {
+                var hit = !q || item.getAttribute('data-haystack').indexOf(q) !== -1;
+                item.style.display = hit ? '' : 'none';
+                if (hit) { total++; }
+            });
+
+            // hide a whole group (e.g. "Workshop Papers") when none of its items match
+            groups.forEach(function (group) {
+                var visible = [].some.call(group.querySelectorAll('.pub-item'), function (item) {
+                    return item.style.display !== 'none';
+                });
+                group.style.display = visible ? '' : 'none';
+            });
+
+            if (empty) { empty.style.display = total ? 'none' : 'block'; }
+        });
+    });
+
+    // 4. Abstract / details toggles: <button class="pub-toggle" aria-controls="panelId">
+    [].forEach.call(document.querySelectorAll('.pub-toggle'), function (button) {
+        var panel = document.getElementById(button.getAttribute('aria-controls'));
+        var label = button.querySelector('.pub-toggle-label');
+        var base = label ? label.textContent : '';
+        if (!panel) { return; }
+
+        button.addEventListener('click', function () {
+            var open = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', open ? 'false' : 'true');
+            panel.hidden = open;
+            if (label) { label.textContent = open ? base : 'hide ' + base; }
+        });
+    });
+
+    // 5. Blog: reading progress bar and current-section highlight in the contents
+    var article = document.querySelector('.article');
+    var bar = document.getElementById('read-progress');
+    var tocLinks = [].slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+    var sections = tocLinks.map(function (link) {
+        return document.getElementById(link.getAttribute('href').slice(1));
+    }).filter(Boolean);
+
+    if (article && (bar || sections.length)) {
+        var onScroll = function () {
+            if (bar) {
+                var rect = article.getBoundingClientRect();
+                var total = article.offsetHeight - window.innerHeight;
+                var done = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 1;
+                bar.style.transform = 'scaleX(' + done + ')';
+            }
+
+            if (sections.length) {
+                var current = sections[0].id;
+                sections.forEach(function (section) {
+                    if (section.getBoundingClientRect().top <= 140) { current = section.id; }
+                });
+                tocLinks.forEach(function (link) {
+                    link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+                });
+            }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        onScroll();
+    }
 })();

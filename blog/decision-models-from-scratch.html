@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Md. Faiyaz Abdullah Sayeedi - Decision Models from Scratch</title>
+    <meta name="description" content="A simple, step-by-step look at a new kind of AI model: what it is, how it is built, and when to use it.">
+    <link rel="icon" type="image/png" href="../img/icon.png">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+    <link rel="stylesheet" href="../css/pace.css">
+    <link rel="stylesheet" href="../css/custom.css">
+
+    <!-- js -->
+    <script src="../js/pace.min.js"></script>
+</head>
+
+<body class="graph-paper">
+
+    <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
+    <!-- header -->
+    <div class="container">
+        <header id="site-header">
+            <a class="site-brand" href="../index.html">
+                <img src="../img/icon.png" alt="" class="logo-icon">
+                Md. Faiyaz Abdullah <span>Sayeedi</span>
+            </a>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="../index.html">About</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../datasets.html">Datasets</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                    <li><a class="current" href="index.html">Blog</a></li>
+                    <li><a href="../curriculumvita.html">CV</a></li>
+                    <li><a href="../honor_achievement.html">Awards</a></li>
+                </ul>
+            </nav>
+            <button type="button" id="trigger-overlay" class="menu-toggle" aria-label="Open menu"
+                aria-controls="site-menu" aria-expanded="false">
+                <span class="ion-navicon"></span>
+            </button>
+        </header>
+    </div>
+
+    <div class="content-body">
+        <div class="container">
+            <p class="crumbs"><a href="index.html">Blog</a><span class="sep">/</span>Decision Models from Scratch</p>
+
+            <div class="article-layout">
+                <article class="article">
+                    <header class="article-head">
+                        <p class="blog-meta">October 2026<span class="dot">&middot;</span>10 min read<span class="dot">&middot;</span>Free 60-page PDF</p>
+                        <h1 class="article-title">Decision Models from Scratch: How Jev-Style AI Picks Instead of Writes</h1>
+                        <p class="article-dek">A simple, step-by-step look at a new kind of AI model: what it is, how it is built, and when to use it.</p>
+                    </header>
+
+                    <details class="toc-mobile">
+                        <summary>On this page</summary>
+                        <ol class="toc">
+                            <li><a href="#writing-versus-picking">Writing versus picking</a></li>
+                            <li><a href="#system-1-and-system-2">System 1 and System 2</a></li>
+                            <li><a href="#meet-jev">Meet Jev</a></li>
+                            <li><a href="#the-pipeline">How a decision model is built</a></li>
+                            <li><a href="#llm-into-a-picker">Turning an LLM into a picker</a></li>
+                            <li><a href="#honest-confidence">Honest confidence</a></li>
+                            <li><a href="#lessons-from-open-research">Lessons from open research</a></li>
+                            <li><a href="#using-a-decision-model-well">Using a decision model well</a></li>
+                            <li><a href="#go-deeper">Want to go deeper?</a></li>
+                        </ol>
+                    </details>
+
+                    <div class="article-body">
+                        <aside class="callout">
+                            <span class="callout-icon" aria-hidden="true">📘</span>
+                            <div class="callout-body">
+                                <p><strong>Want the full guide?</strong> This post covers the core ideas. The free 60-page PDF goes deeper, with diagrams, worked math, training recipes and working Python code.</p>
+                                <div class="callout-actions">
+                                    <a href="Decision_Models_from_Scratch.pdf" download><span class="ion-ios-download-outline"></span>Download the full PDF guide</a>
+                                    <a href="Decision_Models_from_Scratch.pdf" target="_blank" rel="noopener"><span class="ion-android-open"></span>Open in browser</a>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <!-- 1 -->
+                        <section id="writing-versus-picking">
+                            <h2><span class="num">1.</span> Writing versus picking</h2>
+                            <p>Imagine a shop that gets 50,000 customer emails a day. A program must send each email to the right team: <strong>billing</strong>, <strong>shipping</strong> or <strong>tech support</strong>. It must also flag urgent ones.</p>
+                            <p>Many programs today ask a chat AI (a large language model, or <strong>LLM</strong>) to do this. The LLM answers with a sentence:</p>
+                            <blockquote>
+                                <p>"This email should go to the shipping team because the customer says the parcel has not arrived…"</p>
+                            </blockquote>
+                            <p>But the program only needs one word: <code>shipping</code>. It must now dig that word out of the sentence and hope the LLM didn't write "Shipping" or "the delivery team". This is slow, costs money, and sometimes breaks.</p>
+                            <p>A <strong>decision model</strong> works differently:</p>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th></th><th>Chat LLM</th><th>Decision model</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">How it answers</th><td><strong>Writes</strong> text, one token at a time</td><td><strong>Picks</strong> one option from a list you give it</td></tr>
+                                        <tr><th scope="row">What you get back</th><td>A sentence you must parse</td><td>A typed answer plus a probability, e.g. <code>shipping, 86%</code></td></tr>
+                                        <tr><th scope="row">Speed</th><td>Slow (each word is a new step)</td><td>Fast (one pass)</td></tr>
+                                        <tr><th scope="row">Can it break the format?</th><td>Yes</td><td>No: it always returns one of your options</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="key-idea"><strong>The core idea:</strong> an LLM answers by <em>writing</em>. A decision model answers by <em>picking</em>. You give it a question and a fixed list of allowed answers. It picks one and tells you how sure it is.</p>
+                        </section>
+
+                        <!-- 2 -->
+                        <section id="system-1-and-system-2">
+                            <h2><span class="num">2.</span> System 1 and System 2</h2>
+                            <p>The psychologist Daniel Kahneman described two ways people think:</p>
+                            <ul class="duo">
+                                <li><strong>System 1</strong> is fast and automatic. You see a face and instantly know the person is angry.</li>
+                                <li><strong>System 2</strong> is slow and careful. You work out 17 × 24 step by step.</li>
+                            </ul>
+                            <p>Reasoning LLMs that "think out loud" are System 2. Decision models are <strong>System 1</strong>: fast, bounded judgments.</p>
+                            <p>AI agents make hundreds of small System 1 choices. Which tool next? Is this result relevant? Did that step fail? Should a human check this? None of these needs a paragraph. Each needs one choice and a confidence number.</p>
+                        </section>
+
+                        <!-- 3 -->
+                        <section id="meet-jev">
+                            <h2><span class="num">3.</span> Meet Jev</h2>
+                            <p><strong>Jev</strong> is the model that made this idea popular. It comes from <strong>TypeSafe AI</strong>, a San Francisco start-up founded by Diogo Almeida, a former OpenAI researcher. It was released in early access on <strong>15 September 2026</strong>, and TypeSafe calls it the first public <strong>"System One model"</strong>.</p>
+                            <div class="table-wrap">
+                                <table class="data-table kv">
+                                    <tbody>
+                                        <tr><th scope="row">Input</th><td>A <em>state</em> (the facts, e.g. an email) plus one or more typed <em>questions</em></td></tr>
+                                        <tr><th scope="row">Output</th><td>Typed decisions with probabilities and confidence. No text.</td></tr>
+                                        <tr><th scope="row">Price</th><td>$0.042 per million input tokens. Output is free.</td></tr>
+                                        <tr><th scope="row">Speed (company claim)</th><td>70–500 ms end to end</td></tr>
+                                        <tr><th scope="row">Context</th><td>64k tokens per request (version <code>jev-1.13.0</code>)</td></tr>
+                                        <tr><th scope="row">Training method</th><td><strong>RLCD</strong>: Reinforcement Learning for Calibrated Decisions</td></tr>
+                                        <tr><th scope="row">Not published</th><td>Architecture, model size, base model, exact training recipe</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>The three question types</h3>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Type</th><th>Question shape</th><th>What comes back</th><th>Good for</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Choice</th><td>"Pick one of these K options."</td><td>The chosen option, a probability for every option, and a confidence value</td><td>Routing, picking a tool</td></tr>
+                                        <tr><th scope="row">Score</th><td>"Rate this on a scale you define (e.g. 1–5)."</td><td>A level, a probability for each level, and a confidence value</td><td>Urgency, quality, risk</td></tr>
+                                        <tr><th scope="row">Noul</th><td>"Is this statement true?"</td><td>The probability of "yes"</td><td>Yes/no gates</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>You can ask several questions about the same state. Jev answers them independently and in parallel, so you only pay for the state once.</p>
+
+                            <h3>What the money looks like</h3>
+                            <p>Take 1,000,000 decisions with 500 input tokens each. That is 500 million tokens.</p>
+                            <ul class="duo">
+                                <li><strong>Jev:</strong> 500 × $0.042 = <strong>about $21</strong>. Output is free.</li>
+                                <li><strong>A typical LLM:</strong> input costs $0.20–$10 per million tokens. That is <strong>$100 to $5,000</strong>, <em>before</em> paying for the words it writes.</li>
+                            </ul>
+                            <aside class="callout">
+                                <span class="callout-icon" aria-hidden="true">⚠️</span>
+                                <div class="callout-body">
+                                    <p><strong>A fair warning:</strong> TypeSafe's biggest speed and cost numbers come from its own tests. Always measure on your own data.</p>
+                                </div>
+                            </aside>
+                        </section>
+
+                        <!-- 4 -->
+                        <section id="the-pipeline">
+                            <h2><span class="num">4.</span> How a decision model is built: the pipeline</h2>
+                            <p>Every decision model goes through the same big pipeline:</p>
+                            <ol class="pipeline" aria-label="The decision model pipeline">
+                                <li><span class="step">Raw text</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Pretraining</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Post-training</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Decision readout</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Decision data &amp; training</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Calibration</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Serving</span><span class="arr" aria-hidden="true">→</span></li>
+                                <li><span class="step">Your app</span></li>
+                            </ol>
+                            <p><strong>Pretraining.</strong> The model plays one game trillions of times: <em>guess the next token</em>. To get good at this, it must learn grammar, facts and common sense. This knowledge is the "brain" every decision model relies on.</p>
+                            <p><strong>Post-training.</strong> The model learns to behave well. Common methods:</p>
+                            <ul>
+                                <li><strong>SFT</strong> (supervised fine-tuning): learn from good examples.</li>
+                                <li><strong>RLHF</strong>: learn from human preferences.</li>
+                                <li><strong>RLVR</strong>: learn from right/wrong checks.</li>
+                            </ul>
+                            <p><strong>Decision readout.</strong> The model is turned from a writer into a picker (see <a href="#llm-into-a-picker">Section 5</a>).</p>
+                            <p><strong>Decision training and calibration.</strong> The model is trained so that its probabilities are <em>honest</em> (see <a href="#honest-confidence">Section 6</a>).</p>
+                            <aside class="callout">
+                                <span class="callout-icon" aria-hidden="true">🔒</span>
+                                <div class="callout-body">
+                                    <p><strong>What is known and what is not:</strong> TypeSafe has not shared Jev's architecture or training recipe. What we <em>can</em> study is the open, Jev-style models that many people have built since launch, plus the research on them. The full guide marks clearly which parts are known facts and which are educated reconstructions.</p>
+                                </div>
+                            </aside>
+                        </section>
+
+                        <!-- 5 -->
+                        <section id="llm-into-a-picker">
+                            <h2><span class="num">5.</span> Turning an LLM into a picker</h2>
+                            <p>How do you make a language model <em>pick</em> instead of <em>write</em>? Open projects use five designs:</p>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Design</th><th>How it works</th><th>Weakness</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Classifier head</th><td>A fixed output layer, one slot per label</td><td>New labels mean retraining</td></tr>
+                                        <tr><th scope="row">Per-option yes/no</th><td>Ask "Is option k right?" once per option</td><td>Slow, and options are never compared</td></tr>
+                                        <tr><th scope="row">Letter logits</th><td>List options as A, B, C… and read the model's score for each letter</td><td>Only about 26 options</td></tr>
+                                        <tr class="is-key"><th scope="row">Suffix scoring</th><td>Number the options <code>[1]</code>, <code>[2]</code>… and score each answer <code>k]</code></td><td>Option order can bias it (fix: shuffle when training)</td></tr>
+                                        <tr><th scope="row">Pointer head</th><td>A new layer matches a question vector to each option vector</td><td>Must be trained for every new base model</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>The suffix-scoring trick, simply</h3>
+                            <ol class="steps">
+                                <li>Write the options as <code>[1] billing</code>, <code>[2] shipping</code>, <code>[3] tech</code>.</li>
+                                <li>Start the model's answer with <code>Best answer: [</code>.</li>
+                                <li>For each option, measure how likely the model is to continue with <code>1]</code>, <code>2]</code>, <code>3]</code>…</li>
+                                <li>Turn those scores into probabilities with <strong>softmax</strong>:</li>
+                            </ol>
+                            <pre><code>P(option k) = e^(score_k) / sum of e^(score_j) over all options</code></pre>
+                            <p>The closing bracket matters. <code>1]</code> can never be the start of <code>12]</code>, so the options never get confused, however many there are.</p>
+                            <p>The model reads the long input <strong>once</strong> and then scores all short answers <strong>in parallel</strong>. Even 150 options need only one read plus a few tiny steps. There is no word-by-word writing at all.</p>
+                            <p><strong>A worked example.</strong> Suppose the scores for billing, shipping and tech give these values of e^score: 2.718, 7.389 and 1.105. Their total is 11.212. So:</p>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Option</th><th>billing</th><th class="is-key">shipping</th><th>tech</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Probability</th><td>0.24</td><td class="is-key"><strong>0.66</strong></td><td>0.10</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <!-- 6 -->
+                        <section id="honest-confidence">
+                            <h2><span class="num">6.</span> Honest confidence: the idea behind RLCD</h2>
+                            <p>Your software will act on the model's confidence, for example: "if confidence is below 0.8, ask a human." So the confidence must be <strong>calibrated</strong>. When the model says "70% sure", it should be right about 70% of the time.</p>
+                            <p>Common training methods can damage this:</p>
+                            <ul>
+                                <li><strong>RLHF</strong> rewards answers that <em>sound</em> good, which can teach a model to <em>sound</em> confident.</li>
+                                <li><strong>Right/wrong rewards</strong> push the model to put everything on its top guess, i.e. to say 100%.</li>
+                            </ul>
+                            <p>The fix is a <strong>proper scoring rule</strong>: a reward that is highest, on average, when you report your <em>true</em> belief. One example is the <strong>Brier score</strong>, a penalty equal to (probability − outcome)².</p>
+                            <p>Suppose a type of email is truly urgent 70% of the time. Compare the average penalty (lower is better) for different confidence levels:</p>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Reported confidence</th><th>50%</th><th class="is-key">70%</th><th>90%</th><th>100%</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Average Brier penalty</th><td>0.250</td><td class="is-key"><strong>0.210</strong></td><td>0.250</td><td>0.300</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>The honest answer wins. Saying "100% sure" is the worst choice.</p>
+                            <p>TypeSafe's <strong>RLCD</strong> is reinforcement learning aimed at calibrated decisions. Its exact recipe is private. Proper scoring rules are the standard idea that makes "rewarding honesty" possible.</p>
+                        </section>
+
+                        <!-- 7 -->
+                        <section id="lessons-from-open-research">
+                            <h2><span class="num">7.</span> Lessons from open research</h2>
+                            <p>An October 2026 research paper, <em>LLM-as-Jev</em>, studied in detail how to build Jev-style models from open LLMs. Its key findings are useful for anyone building or using decision models.</p>
+
+                            <div class="finding">
+                                <span class="finding-num">1</span>
+                                <div class="finding-body">
+                                    <p><strong>A good LLM is already a decision model.</strong> A small open model (Qwen3.5-4B) with suffix scoring and <strong>no training at all</strong> scored 81.4% on the public JevBench benchmark. That is on par with several fine-tuned community models. Its probabilities were already well calibrated.</p>
+                                </div>
+                            </div>
+
+                            <div class="finding">
+                                <span class="finding-num">2</span>
+                                <div class="finding-body">
+                                    <p><strong>Fine-tuning helps small models and narrow tasks most.</strong></p>
+                                    <div class="table-wrap">
+                                        <table class="data-table">
+                                            <thead>
+                                                <tr><th>Model</th><th>Task</th><th>Before</th><th>After fine-tuning</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><th scope="row">0.6B model</th><td>Banking77 (77 intents)</td><td>22.2%</td><td><strong>60.5%</strong></td></tr>
+                                                <tr><th scope="row">4B model</th><td>Banking77</td><td>69.0%</td><td>75.4%</td></tr>
+                                                <tr><th scope="row">4B model</th><td>JevBench (broad)</td><td>81.4%</td><td>84.0% (with LoRA)</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p>Fine-tuning teaches <em>format and discrimination</em>. It does not add world knowledge the model never had.</p>
+                                </div>
+                            </div>
+
+                            <div class="finding">
+                                <span class="finding-num">3</span>
+                                <div class="finding-body">
+                                    <p><strong>Data balance matters more than data size.</strong> Two traps:</p>
+                                    <ul>
+                                        <li><strong>The intent trap.</strong> Training only on intent-routing data, with no yes/no questions, made the model say "yes" too often. It also avoided "none of these" and became over-confident. Overall accuracy <em>dropped</em> from 81.4% to 74.9%.</li>
+                                        <li><strong>The short-context trap.</strong> Training only on short examples made long documents worse. Adding a few thousand long examples fixed it.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="finding">
+                                <span class="finding-num">4</span>
+                                <div class="finding-body">
+                                    <p><strong>Protect the model while training.</strong> Without a safeguard, fine-tuned models started adding junk text after their answers. The fix is a <strong>KL anchor</strong>: a penalty that keeps the new model close to the original. Accuracy scores alone did not reveal this damage.</p>
+                                </div>
+                            </div>
+
+                            <div class="finding">
+                                <span class="finding-num">5</span>
+                                <div class="finding-body">
+                                    <p><strong>A thinking budget closes the gap.</strong> Letting the same small model "think" for up to 4,096 tokens before answering raised its accuracy to 94.8%. That is on par with a frontier model, at an estimated 5.5× lower cost. This "Thinking Jev" setup is like a dial between System 1 and System 2.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 8 -->
+                        <section id="using-a-decision-model-well">
+                            <h2><span class="num">8.</span> Using a decision model well</h2>
+                            <p>Put each kind of work in the right layer:</p>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Layer</th><th>Good at</th><th>Never give it</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Plain code</th><td>Math, dates, limits, permissions, payments</td><td>Fuzzy meaning</td></tr>
+                                        <tr><th scope="row">Decision model</th><td>Bounded choices, scores, yes/no judgments</td><td>Writing, exact math, final authority</td></tr>
+                                        <tr><th scope="row">LLM</th><td>Writing, explaining, open reasoning</td><td>Unsupervised power over important actions</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p><strong>Good habits:</strong></p>
+                            <ul class="checklist">
+                                <li><strong>Ask atomic questions.</strong> Not "Is this trade safe?" but several small, clear questions, combined in code.</li>
+                                <li><strong>Always add an escape option</strong> such as "other" or "human review".</li>
+                                <li><strong>Keep thresholds in your code</strong>, and tune them on your own data.</li>
+                                <li><strong>Pin the model version</strong> so your thresholds stay valid.</li>
+                                <li><strong>Start in shadow mode.</strong> Run the model next to your current system, compare, and switch on step by step.</li>
+                            </ul>
+                            <p><strong>Known weak spots:</strong> arithmetic, counting, comparing dates, multi-step logic, distraction by irrelevant text, and manipulation hidden inside user-written input.</p>
+                            <aside class="callout">
+                                <span class="callout-icon" aria-hidden="true">💡</span>
+                                <div class="callout-body">
+                                    <p><strong>Typed is not the same as correct.</strong> A decision model can never return a malformed answer. But it can still pick the <em>wrong</em> option.</p>
+                                </div>
+                            </aside>
+                        </section>
+
+                        <!-- go deeper -->
+                        <section id="go-deeper" class="cta-section">
+                            <div class="cta">
+                                <h2>Want to go deeper?</h2>
+                                <p>The full <strong>Decision Models from Scratch</strong> guide (60 pages) covers everything in this post in much more detail, starting from zero:</p>
+                                <ul>
+                                    <li>tokens, embeddings, transformers, softmax and the KV cache, explained simply</li>
+                                    <li>pretraining, SFT, RLHF, RLVR and the math of proper scoring rules</li>
+                                    <li>all five picker architectures, with diagrams, and the suffix-tree method step by step</li>
+                                    <li>dataset formats, synthetic data pipelines and contamination checks</li>
+                                    <li>fine-tuning with LoRA, listwise losses, KL anchors and real hyperparameters</li>
+                                    <li>calibration: reliability diagrams, ECE, Brier, temperature scaling, and the JevBench leaderboard</li>
+                                    <li>cost per decision in FLOPs and dollars</li>
+                                    <li><strong>hands-on Python code</strong> to build and fine-tune your own mini decision model</li>
+                                </ul>
+                                <a class="btn-ink" href="Decision_Models_from_Scratch.pdf" download>📘 Download the full PDF guide</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <p class="article-sources">Sources: TypeSafe AI's launch post and documentation; Li &amp; Wagle, "LLM-as-Jev" (arXiv:2610.02076, 2026); independent reviews and launch coverage from Wavect, The New Stack, VKTR and NYU Shanghai RITS (September–October 2026). Facts were checked as of October 2026. Jev's internals are not public; the "how it's built" sections describe open, Jev-style models. This is an independent guide, not affiliated with TypeSafe AI.</p>
+
+                    <div class="article-foot">
+                        <ul class="pub-links">
+                            <li><a href="index.html">&larr; all posts</a></li>
+                        </ul>
+                        <ul class="pub-links">
+                            <li><a href="Decision_Models_from_Scratch.pdf" target="_blank" rel="noopener">pdf guide (60 pages)</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <aside class="article-aside" aria-label="On this page">
+                    <p class="toc-label">On this page</p>
+                    <ol class="toc">
+                        <li><a href="#writing-versus-picking">Writing versus picking</a></li>
+                        <li><a href="#system-1-and-system-2">System 1 and System 2</a></li>
+                        <li><a href="#meet-jev">Meet Jev</a></li>
+                        <li><a href="#the-pipeline">How a decision model is built</a></li>
+                        <li><a href="#llm-into-a-picker">Turning an LLM into a picker</a></li>
+                        <li><a href="#honest-confidence">Honest confidence</a></li>
+                        <li><a href="#lessons-from-open-research">Lessons from open research</a></li>
+                        <li><a href="#using-a-decision-model-well">Using a decision model well</a></li>
+                        <li><a href="#go-deeper">Want to go deeper?</a></li>
+                    </ol>
+                    <div class="toc-card">
+                        <p><strong>📘 The full guide</strong>The free 60-page PDF goes deeper, with diagrams, worked math, training recipes and working Python code.</p>
+                        <a class="btn-ink" href="Decision_Models_from_Scratch.pdf" download><span class="ion-ios-download-outline"></span>Download PDF</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Contact -->
+            <div class="row">
+                <div class="col-md-12 section" id="contact">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-note">Happy to talk about research, collaborations, or anything in the papers above.
+                        Email is the fastest way to reach me.</p>
+
+                    <div class="contact-block">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="contact-panel">
+                                    <h3>Send a message</h3>
+                                    <form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
+                                        class="contact-form">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" name="name" placeholder="Your name" required>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="email" name="email" placeholder="Your email" required>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="subject" placeholder="Subject" required>
+                                        <textarea name="message" rows="7" placeholder="Your message" required></textarea>
+                                        <button type="submit" class="btn-contact">
+                                            <span class="ion-ios-paperplane"></span>Send Message
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="contact-panel">
+                                    <h3>Contact details</h3>
+                                    <ul class="contact-details">
+                                        <li>
+                                            <span class="ci ion-ios-email"></span>
+                                            <span>
+                                                <span class="cd-label">Email</span>
+                                                <span class="cd-value"><a href="mailto:msayeedi212049@bscse.uiu.ac.bd">msayeedi212049@bscse.uiu.ac.bd</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-email-outline"></span>
+                                            <span>
+                                                <span class="cd-label">Secondary email</span>
+                                                <span class="cd-value"><a href="mailto:faiyazabdullah114708@gmail.com">faiyazabdullah114708@gmail.com</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-telephone"></span>
+                                            <span>
+                                                <span class="cd-label">Phone</span>
+                                                <span class="cd-value"><a href="tel:+8801704054900">+880 1704 054900</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-location"></span>
+                                            <span>
+                                                <span class="cd-label">Location</span>
+                                                <span class="cd-value">Dhaka, Bangladesh</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>Find me online</h3>
+                                    <ul class="profile-links">
+                                        <li><a href="https://scholar.google.com/citations?user=gLTfVpwAAAAJ&hl=en" target="_blank"
+                                                rel="noopener">Google Scholar</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah" target="_blank" rel="noopener">GitHub</a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/in/mdfaiyazabdullahsayeedi/" target="_blank"
+                                                rel="noopener">LinkedIn</a></li>
+                                        <li><a href="https://orcid.org/0009-0007-3079-7806" target="_blank"
+                                                rel="noopener">ORCID</a></li>
+                                        <li><a href="https://www.researchgate.net/profile/Md-Sayeedi" target="_blank"
+                                                rel="noopener">ResearchGate</a></li>
+                                        <li><a href="https://www.facebook.com/faiyazabdullah336908" target="_blank"
+                                                rel="noopener">Facebook</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- footer -->
+    <footer id="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <button type="button" id="back-to-top" aria-label="Back to top"><span class="ion-chevron-up"></span></button>
+
+    <!-- mobile menu -->
+    <div class="overlay" id="site-menu">
+        <button type="button" class="overlay-close" aria-label="Close menu"><span class="ion-ios-close-empty"></span></button>
+        <nav aria-label="Mobile">
+            <ul>
+                <li><a href="../index.html">About</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../datasets.html">Datasets</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a class="current" href="index.html">Blog</a></li>
+                <li><a href="../curriculumvita.html">CV</a></li>
+                <li><a href="../honor_achievement.html">Awards</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,61 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Md. Faiyaz Abdullah Sayeedi - Projects</title>
-    <link rel="icon" type="image/png" href="img/icon.png">
-
-    <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Md. Faiyaz Abdullah Sayeedi - Awards</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
 
     <!-- css -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
     <link rel="stylesheet" href="css/pace.css">
     <link rel="stylesheet" href="css/custom.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- js -->
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/pace.min.js"></script>
-    <script src="js/modernizr.custom.js"></script>
 </head>
 
 <body class="graph-paper">
-    <!-- navigation -->
+    <!-- header -->
     <div class="container">
         <header id="site-header">
-            <div class="row">
-                <div class="col-md-4 col-sm-8 col-xs-10">
-                    <div class="logo">
-                        <h1 style="margin-top: 1.5rem;">
-                            <a href="index.html">
-                                <img src="img/icon.png" alt="" class="logo-icon">
-                                Md. Faiyaz Abdullah <span>Sayeedi</span>
-                            </a>
-                        </h1>
-                    </div>
-                </div>
-                <div class="col-md-8 hidden-sm hidden-xs">
-                    <nav class="site-nav">
-                        <ul>
-                            <li><a href="index.html">About</a></li>
-                            <li><a href="publications.html">Publications</a></li>
-                            <li><a href="datasets.html">Datasets</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="curriculumvita.html">CV</a></li>
-                            <li><span class="current">Awards</span></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-sm-4 col-xs-2 hidden-md hidden-lg" style="text-align: right !important;">
-                    <button type="button" id="trigger-overlay" class="menu-toggle">
-                        <span class="ion-navicon"></span>
-                    </button>
-                </div>
-            </div>
+            <a class="site-brand" href="index.html">
+                <img src="img/icon.png" alt="" class="logo-icon">
+                Md. Faiyaz Abdullah <span>Sayeedi</span>
+            </a>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="datasets.html">Datasets</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><a href="curriculumvita.html">CV</a></li>
+                    <li><span class="current">Awards</span></li>
+                </ul>
+            </nav>
+            <button type="button" id="trigger-overlay" class="menu-toggle" aria-label="Open menu"
+                aria-controls="site-menu" aria-expanded="false">
+                <span class="ion-navicon"></span>
+            </button>
         </header>
     </div>
 
@@ -67,7 +51,7 @@
                 <h2 class="section-title">Awards &amp; Honors</h2>
                 <p class="section-note">Academic, competition and project-show recognitions received during my undergraduate study.</p>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Scholarships &amp; Grants</h2>
+                <h2 class="section-title">Scholarships &amp; Grants</h2>
                 <ul class="award-grid">
                         <li>
                             <span class="award-kind grant">Scholarship</span>
@@ -81,7 +65,7 @@
                         </li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">Competitions &amp; Olympiads</h2>
+                <h2 class="section-title">Competitions &amp; Olympiads</h2>
                 <ul class="award-grid">
                         <li>
                             <span class="award-kind">Finalist</span>
@@ -100,7 +84,7 @@
                         </li>
                 </ul>
 
-                <h2 class="section-title" style="margin-top: 3.5rem;">CSE Project Show Awards</h2>
+                <h2 class="section-title">CSE Project Show Awards</h2>
                 <ul class="award-grid">
                         <li>
                             <span class="award-kind">Best Poster</span>
@@ -227,30 +211,28 @@
 
     </div>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer id="site-footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
-                            href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub
-                        Pages.</p>
-                </div>
-            </div>
+            <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub Pages.</p>
         </div>
     </footer>
 
-    <!-- Mobile Menu -->
-    <div class="overlay overlay-hugeinc">
-        <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
-        <nav>
+    <button type="button" id="back-to-top" aria-label="Back to top"><span class="ion-chevron-up"></span></button>
+
+    <!-- mobile menu -->
+    <div class="overlay" id="site-menu">
+        <button type="button" class="overlay-close" aria-label="Close menu"><span class="ion-ios-close-empty"></span></button>
+        <nav aria-label="Mobile">
             <ul>
                 <li><a href="index.html">About</a></li>
                 <li><a href="publications.html">Publications</a></li>
                 <li><a href="datasets.html">Datasets</a></li>
                 <li><a href="projects.html">Projects</a></li>
-                <li><a href="curriculumvita.html">Curriculum vitae</a></li>
-                <li><strong>Honor & Achievement 𝄪</strong></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="curriculumvita.html">CV</a></li>
+                <li><span class="current">Awards</span></li>
             </ul>
         </nav>
     </div>
@@ -263,8 +245,6 @@
     </a> -->
 
     <script src="js/script.js"></script>
-    <!-- jQuery and JS logic -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </body>
 
 </html>
