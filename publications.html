@@ -112,9 +112,15 @@
                                 <li class="pub-item">
                                     <span class="pub-id">[C1]<span class="pub-tag cvf" tabindex="0" data-venue="Winter Conference on Applications of Computer Vision (WACV 2027)">WACV 2027</span></span>
                                     <div class="pub-body">
-                                        <h3 class="pub-title">Entropy-Gated Dynamic Rectification for Object Hallucination in Large Vision-Language Models</h3>
+                                        <h3 class="pub-title"><a href="publications/3757_EGDR_camera_ready.pdf" target="_blank" rel="noopener">Entropy-Gated Dynamic Rectification for Object Hallucination in Large Vision-Language Models</a></h3>
                                         <p class="pub-authors">Riasad Alvi, Md. Asaduzzaman Shuvo, Md. Ahashan Habib, <span class="me">Md. Faiyaz Abdullah Sayeedi</span></p>
                                         <p class="pub-venue">Winter Conference on Applications of Computer Vision (WACV 2027)</p>
+                                        <ul class="pub-links">
+                                            <li><button type="button" class="pub-toggle" aria-expanded="false" aria-controls="abs-c1"><span class="pub-toggle-label">abstract</span></button></li>
+                                            <li><a href="publications/3757_EGDR_camera_ready.pdf" target="_blank" rel="noopener">paper</a></li>
+                                            <li><a href="https://github.com/alvi-uiu/EGDR" target="_blank" rel="noopener">code</a></li>
+                                        </ul>
+                                        <p class="pub-abstract" id="abs-c1" hidden>Large Vision-Language Models (LVLMs) routinely name objects that are absent from the image. Latent steering can reduce this failure in one model forward pass, but a fixed gate treats early and late decoding steps by the same criterion. We observe that predictive entropy varies sharply within free-running generation, while states that commit to short answers occupy a narrow, confident band. We exploit this temporal mismatch by using uncertainty as a causally available, token-local control signal for an existing steering gate. We propose Entropy-Gated Dynamic Rectification (EGDR), which lowers the intervention threshold when entropy derived from the preceding step&rsquo;s already available logits is high and retains the calibrated operating point when it is low. On LLaVA-1.5-7B, the underlying static gate lowers CHAIR C<sub>S</sub>/C<sub>I</sub> from 53.00/15.30 to 32.00/14.30; replacing only its constant threshold with EGDR further lowers them to 29.00/13.60. At a matched 58% intervention rate, the corresponding static control obtains 30.50/14.00. The gain over the static gate holds on LLaVA-NeXT-7B and grows with the generation budget, while POPE scores and general multimodal capability remain effectively unchanged. EGDR requires no additional model forward pass and adds roughly 2% measured latency. Our code is available at https://github.com/alvi-uiu/EGDR.</p>
                                     </div>
                                 </li>
                                 <li class="pub-item">
