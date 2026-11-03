@@ -2366,6 +2366,21 @@ a.section-more:focus {
 	margin: 0;
 }
 
+/* math (KaTeX); wide equations scroll sideways instead of breaking the layout */
+.article-body .math {
+	margin: 0 0 14px;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.article-body .math .katex-display {
+	margin: 6px 0;
+}
+
+.article-body .katex {
+	font-size: 1.1em;
+}
+
 /* the one-line takeaway */
 .key-idea {
 	padding: 14px 18px;

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Md. Faiyaz Abdullah Sayeedi - The Kalman Filter</title>
+    <meta name="description" content="An intuitive, step-by-step introduction to the Kalman filter with a worked car-and-GPS example, the derivation of the Kalman gain, and the position–velocity case.">
+    <meta name="keywords" content="kalman-filter, estimation, control, robotics, math">
+    <link rel="icon" type="image/png" href="../img/icon.png">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+    <link rel="stylesheet" href="../css/pace.css">
+    <link rel="stylesheet" href="../css/custom.css">
+
+    <!-- math rendering (KaTeX, this page only) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+        integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    <!-- js -->
+    <script src="../js/pace.min.js"></script>
+</head>
+
+<body class="graph-paper">
+
+    <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
+    <!-- header -->
+    <div class="container">
+        <header id="site-header">
+            <a class="site-brand" href="../index.html">
+                <img src="../img/icon.png" alt="" class="logo-icon">
+                Md. Faiyaz Abdullah <span>Sayeedi</span>
+            </a>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="../index.html">About</a></li>
+                    <li><a href="../publications.html">Publications</a></li>
+                    <li><a href="../datasets.html">Datasets</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                    <li><a class="current" href="index.html">Blog</a></li>
+                    <li><a href="../curriculumvita.html">CV</a></li>
+                    <li><a href="../honor_achievement.html">Awards</a></li>
+                </ul>
+            </nav>
+            <button type="button" id="trigger-overlay" class="menu-toggle" aria-label="Open menu"
+                aria-controls="site-menu" aria-expanded="false">
+                <span class="ion-navicon"></span>
+            </button>
+        </header>
+    </div>
+
+    <div class="content-body">
+        <div class="container">
+            <p class="crumbs"><a href="index.html">Blog</a><span class="sep">/</span>The Kalman Filter</p>
+
+            <div class="article-layout">
+                <article class="article">
+                    <header class="article-head">
+                        <p class="blog-meta">November 2026<span class="dot">&middot;</span>10 min read<span class="dot">&middot;</span>24-page PDF notes</p>
+                        <h1 class="article-title">The Kalman Filter: How Two Imperfect Sources Make One Better Estimate</h1>
+                        <p class="article-dek">An intuitive, step-by-step introduction to the Kalman filter with a worked car-and-GPS example, the derivation of the Kalman gain, and the position–velocity case.</p>
+                    </header>
+
+                    <details class="toc-mobile">
+                        <summary>On this page</summary>
+                        <ol class="toc">
+                            <li><a href="#the-problem">Two imperfect sources</a></li>
+                            <li><a href="#bell-curve">Uncertainty as a bell curve</a></li>
+                            <li><a href="#worked-example">A worked example</a></li>
+                            <li><a href="#where-the-gain-comes-from">Where the gain comes from</a></li>
+                            <li><a href="#predict-update-loop">The predict–update loop</a></li>
+                            <li><a href="#position-and-velocity">Position and velocity</a></li>
+                            <li><a href="#limits-and-variations">Limits and variations</a></li>
+                            <li><a href="#cheat-sheet">Cheat sheet</a></li>
+                            <li><a href="#go-deeper">Go deeper</a></li>
+                        </ol>
+                    </details>
+
+                    <div class="article-body">
+                        <aside class="callout">
+                            <span class="callout-icon" aria-hidden="true">📄</span>
+                            <div class="callout-body">
+                                <p><strong>Want the full version?</strong> This post covers the core ideas. The <a href="Kalman_Filter_Notes.pdf" target="_blank" rel="noopener">complete PDF notes</a> (24 pages) include all figures, every derivation step, full matrix arithmetic, the matrix-gain derivation, six practice problems with solutions, and Python code.</p>
+                                <div class="callout-actions">
+                                    <a href="Kalman_Filter_Notes.pdf" download><span class="ion-ios-download-outline"></span>Download the PDF notes</a>
+                                    <a href="Kalman_Filter_Notes.pdf" target="_blank" rel="noopener"><span class="ion-android-open"></span>Open in browser</a>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <!-- the problem -->
+                        <section id="the-problem">
+                            <h2>The problem: two imperfect sources</h2>
+                            <p>In 1968, Apollo 8 flew to the Moon with a computer that had only a few kilobytes of working memory. It had to know where the spacecraft was at every moment, and it had two ways to find out:</p>
+                            <ol class="steps">
+                                <li><strong>Physics (a model).</strong> If you know where you were and how fast you were moving, you can calculate where you are now. But every small error is carried into the next calculation, so the estimate slowly <strong>drifts</strong>.</li>
+                                <li><strong>Measurement (a sensor).</strong> Star sightings are tied to the real world, so they don't drift. But every sighting is <strong>noisy</strong>: the readings jump around.</li>
+                            </ol>
+                            <p>Trusting only the sensor gives a jittery estimate. Trusting only the model gives a drifting one. A fixed 50/50 average only works if both sources are equally reliable, which is rarely true.</p>
+                            <p>What we need is a <strong>weight that reflects how much each source deserves to be trusted right now</strong>. The Kalman filter computes exactly that weight. Your phone uses the same idea to keep the blue dot on the map steady.</p>
+                        </section>
+
+                        <!-- bell curve -->
+                        <section id="bell-curve">
+                            <h2>Describing uncertainty with a bell curve</h2>
+                            <p>The <strong>state</strong> is the set of numbers that describes the system, for example a car's position \(x\).</p>
+                            <p>Instead of storing one number ("the car is at 100 m"), the Kalman filter stores a <strong>bell curve</strong> (Gaussian):</p>
+                            <div class="math">\[
+                                p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+                            \]</div>
+                            <ul>
+                                <li>The <strong>mean</strong> \(\mu\) is our best guess.</li>
+                                <li>The <strong>variance</strong> \(\sigma^2\) is how unsure we are. A bigger variance means a wider curve.</li>
+                                <li>The <strong>standard deviation</strong> \(\sigma = \sqrt{\sigma^2}\) is in metres. About 68% of the time the truth is within \(\pm\sigma\) of the mean.</li>
+                            </ul>
+                            <p>So variance 4 means "usually within about 2 m", and variance 12 means "usually within about 3.5 m".</p>
+                            <p>Two facts about variance are used throughout:</p>
+                            <div class="math">\[
+                                \operatorname{Var}(aX) = a^2\,\operatorname{Var}(X), \qquad
+                                \operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) \ \text{ (if independent)}
+                            \]</div>
+                        </section>
+
+                        <!-- worked example -->
+                        <section id="worked-example">
+                            <h2>A worked example</h2>
+                            <p>A car drives along a straight road.</p>
+                            <ul class="duo">
+                                <li>The <strong>model</strong> predicts the car is at \(x_{\text{pred}} = 100\) m, with variance \(\sigma^2_{\text{pred}} = 4\).</li>
+                                <li>The <strong>GPS</strong> says the car is at \(z = 106\) m, with variance \(\sigma^2_{\text{GPS}} = 12\).</li>
+                            </ul>
+                            <p>The difference between them is the <strong>innovation</strong> (the "surprise"):</p>
+                            <div class="math">\[
+                                y = z - x_{\text{pred}} = 106 - 100 = 6 \text{ m}
+                            \]</div>
+                            <p>How much of this 6 m surprise should we believe? The answer is the <strong>Kalman gain</strong>:</p>
+                            <div class="math">\[
+                                K = \frac{\sigma^2_{\text{pred}}}{\sigma^2_{\text{pred}} + \sigma^2_{\text{GPS}}} = \frac{4}{4 + 12} = \frac{1}{4}
+                            \]</div>
+                            <p>We move one quarter of the way from the prediction towards the measurement:</p>
+                            <div class="math">\[
+                                \hat{x} = x_{\text{pred}} + K\,(z - x_{\text{pred}}) = 100 + \tfrac{1}{4}\cdot 6 = 101.5 \text{ m}
+                            \]</div>
+                            <p>And the new variance is:</p>
+                            <div class="math">\[
+                                \sigma^2_{\text{new}} = (1 - K)\,\sigma^2_{\text{pred}} = \tfrac{3}{4}\cdot 4 = 3
+                            \]</div>
+                            <p class="key-idea"><strong>The surprising result:</strong> the new variance (3) is smaller than the prediction's (4) and much smaller than the GPS's (12). Combining a good source with a worse one gives an estimate that is <strong>better than the good source alone</strong>.</p>
+                        </section>
+
+                        <!-- the gain -->
+                        <section id="where-the-gain-comes-from">
+                            <h2>Where does the gain come from?</h2>
+                            <p>The new estimate is a mixture of the two sources:</p>
+                            <div class="math">\[
+                                \hat{x} = (1 - K)\,x_{\text{pred}} + K\,z
+                            \]</div>
+                            <p>Write each source as "truth + error": \(x_{\text{pred}} = x + e_p\) and \(z = x + e_g\), with independent errors of variance \(\sigma_p^2\) and \(\sigma_g^2\). Then the error of our estimate is \((1-K)e_p + K e_g\), and its variance is:</p>
+                            <div class="math">\[
+                                \sigma^2_{\text{new}}(K) = (1 - K)^2\,\sigma_p^2 + K^2\,\sigma_g^2
+                            \]</div>
+                            <p>As \(K\) grows, the first term shrinks and the second grows, so there is a lowest point in between. Set the derivative to zero:</p>
+                            <div class="math">\[
+                                \frac{d\sigma^2_{\text{new}}}{dK} = -2(1-K)\,\sigma_p^2 + 2K\,\sigma_g^2 = 0
+                                \quad\Longrightarrow\quad
+                                K = \frac{\sigma_p^2}{\sigma_p^2 + \sigma_g^2}
+                            \]</div>
+                            <p>The second derivative, \(2\sigma_p^2 + 2\sigma_g^2\), is positive, so this is a minimum. For the car: \(\frac{d}{dK}\left[4(1-K)^2 + 12K^2\right] = 32K - 8 = 0\), so \(K = \tfrac14\).</p>
+
+                            <h3>Precisions add</h3>
+                            <p>Plugging the best \(K\) back in gives \(\sigma^2_{\text{new}} = \dfrac{\sigma_p^2\,\sigma_g^2}{\sigma_p^2 + \sigma_g^2}\). Taking the reciprocal:</p>
+                            <div class="math">\[
+                                \frac{1}{\sigma^2_{\text{new}}} = \frac{1}{\sigma_p^2} + \frac{1}{\sigma_g^2}
+                            \]</div>
+                            <p>The quantity \(1/\sigma^2\) is called <strong>precision</strong>, and the rule is simply: <strong>precisions add</strong>. For the car, \(\tfrac14 + \tfrac1{12} = \tfrac13\), so the new variance is 3. Every source adds some precision, so combining can never make you less certain.</p>
+
+                            <h3>Sanity checks</h3>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Case</th><th>Gain</th><th>Meaning</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Perfect sensor (\(\sigma_g^2 = 0\))</th><td>\(K = 1\)</td><td>Jump to the measurement</td></tr>
+                                        <tr><th scope="row">Useless sensor (\(\sigma_g^2 \to \infty\))</th><td>\(K \to 0\)</td><td>Ignore the measurement</td></tr>
+                                        <tr><th scope="row">Equally good sources</th><td>\(K = \tfrac12\)</td><td>Plain average, variance halved</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <!-- predict-update loop -->
+                        <section id="predict-update-loop">
+                            <h2>The predict–update loop</h2>
+                            <p>The car keeps moving, so the filter repeats two steps forever.</p>
+                            <p><strong>Predict.</strong> Move the estimate forward with the model, and add <strong>process noise</strong> \(q\) because the model is never perfect:</p>
+                            <div class="math">\[
+                                x^- = x + v\,\Delta t, \qquad P^- = P + q
+                            \]</div>
+                            <p><strong>Update.</strong> When a measurement \(z\) arrives (sensor variance \(r\)):</p>
+                            <div class="math">\[
+                                K = \frac{P^-}{P^- + r}, \qquad x = x^- + K\,(z - x^-), \qquad P = (1 - K)\,P^-
+                            \]</div>
+                            <p>Prediction makes the bell curve <strong>wider</strong>; measurement makes it <strong>narrower</strong>.</p>
+
+                            <h3>Watching the filter settle</h3>
+                            <p>Start with a terrible guess, \(P^- = 100\), and use \(q = 1\), \(r = 12\):</p>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Step</th><th>\(P^-\) (after predict)</th><th>Gain \(K\)</th><th>\(P\) (after update)</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">1</th><td>100.000</td><td>0.893</td><td>10.714</td></tr>
+                                        <tr><th scope="row">2</th><td>11.714</td><td>0.494</td><td>5.928</td></tr>
+                                        <tr><th scope="row">3</th><td>6.928</td><td>0.366</td><td>4.392</td></tr>
+                                        <tr><th scope="row">5</th><td>4.720</td><td>0.282</td><td>3.388</td></tr>
+                                        <tr><th scope="row">10</th><td>4.037</td><td>0.252</td><td>3.021</td></tr>
+                                        <tr class="is-key"><th scope="row">∞</th><td><strong>4</strong></td><td><strong>0.25</strong></td><td><strong>3</strong></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>At first the filter trusts the GPS almost completely (the model is still very uncertain). As it gains confidence, it relies more on its own prediction.</p>
+
+                            <h3>The steady state, exactly</h3>
+                            <p>In steady state, \(P\) stops changing:</p>
+                            <div class="math">\[
+                                P = \frac{r\,(P + q)}{P + q + r}
+                                \quad\Longrightarrow\quad
+                                P^2 + P - 12 = 0
+                                \quad\Longrightarrow\quad
+                                P = 3
+                            \]</div>
+                            <p>So \(P^- = 4\) and \(K = \tfrac{4}{16} = \tfrac14\). In general, \(P_\infty = \tfrac12\left(-q + \sqrt{q^2 + 4qr}\right)\).</p>
+                            <p>This means the first example wasn't chosen by hand: it was the filter <strong>after it had settled</strong>. Nobody told the filter to trust the GPS by one quarter. That weight came from the noise levels alone.</p>
+                        </section>
+
+                        <!-- position and velocity -->
+                        <section id="position-and-velocity">
+                            <h2>More than one number: position and velocity</h2>
+                            <p>Now estimate both position \(p\) and velocity \(v\), while the GPS still measures only position. The uncertainty becomes a <strong>covariance matrix</strong>:</p>
+                            <div class="math">\[
+                                \mathbf{x} = \begin{bmatrix} p \\ v \end{bmatrix}, \qquad
+                                P = \begin{bmatrix} \operatorname{Var}(p) &amp; \operatorname{Cov}(p,v) \\ \operatorname{Cov}(v,p) &amp; \operatorname{Var}(v) \end{bmatrix}
+                            \]</div>
+                            <p>The diagonal holds the individual uncertainties. The off-diagonal entries say how the errors are <strong>linked</strong>.</p>
+                            <p>The equations have exactly the same structure as before:</p>
+                            <div class="math">\[
+                                \begin{aligned}
+                                &amp;\textbf{Predict:} &amp;&amp; \hat{\mathbf{x}}^- = F\hat{\mathbf{x}}, &amp;&amp; P^- = FPF^\top + Q \\
+                                &amp;\textbf{Update:} &amp;&amp; K = P^-H^\top\left(HP^-H^\top + R\right)^{-1}, &amp;&amp; \hat{\mathbf{x}} = \hat{\mathbf{x}}^- + K\left(\mathbf{z} - H\hat{\mathbf{x}}^-\right), \quad P = (I - KH)\,P^-
+                                \end{aligned}
+                            \]</div>
+                            <p>For our car with \(\Delta t = 1\) s:</p>
+                            <div class="math">\[
+                                F = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{bmatrix}, \quad
+                                H = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}, \quad
+                                Q = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}, \quad
+                                R = 12
+                            \]</div>
+
+                            <h3>Worked example</h3>
+                            <p>Start with \(\hat{\mathbf{x}} = \begin{bmatrix} 242.8 \\ 20 \end{bmatrix}\) and \(P = \begin{bmatrix} 3 &amp; 0 \\ 0 &amp; 4 \end{bmatrix}\).</p>
+                            <p><strong>Predict:</strong></p>
+                            <div class="math">\[
+                                \hat{\mathbf{x}}^- = \begin{bmatrix} 262.8 \\ 20 \end{bmatrix}, \qquad
+                                P^- = \begin{bmatrix} 3 &amp; 4 \\ 0 &amp; 4 \end{bmatrix}\begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} + Q
+                                = \begin{bmatrix} 7 &amp; 4 \\ 4 &amp; 4 \end{bmatrix} + \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
+                                = \begin{bmatrix} 8 &amp; 4 \\ 4 &amp; 4 \end{bmatrix}
+                            \]</div>
+                            <p>The off-diagonal 4 appears because position moves according to velocity: if the velocity estimate is too high, the predicted position also ends up too far ahead.</p>
+                            <p><strong>Update</strong> with a GPS reading \(z = 252.8\) m (10 m behind the prediction):</p>
+                            <div class="math">\[
+                                y = 252.8 - 262.8 = -10, \qquad S = 8 + 12 = 20, \qquad
+                                K = \frac{1}{20}\begin{bmatrix} 8 \\ 4 \end{bmatrix} = \begin{bmatrix} 0.4 \\ 0.2 \end{bmatrix}
+                            \]</div>
+                            <div class="math">\[
+                                \hat{\mathbf{x}} = \begin{bmatrix} 262.8 - 4 \\ 20 - 2 \end{bmatrix} = \begin{bmatrix} 258.8 \\ 18 \end{bmatrix}, \qquad
+                                P = \begin{bmatrix} 0.6 &amp; 0 \\ -0.2 &amp; 1 \end{bmatrix}\begin{bmatrix} 8 &amp; 4 \\ 4 &amp; 4 \end{bmatrix} = \begin{bmatrix} 4.8 &amp; 2.4 \\ 2.4 &amp; 3.2 \end{bmatrix}
+                            \]</div>
+                            <p class="key-idea"><strong>The GPS never measured velocity, yet velocity was corrected</strong> from 20 to 18 m/s. Because the filter knows position and velocity errors are linked, it reasons: "if I was too far ahead, I was probably also going too fast." The velocity variance also dropped from 4 to 3.2.</p>
+                            <aside class="callout">
+                                <div class="callout-body">
+                                    <p>The <a href="Kalman_Filter_Notes.pdf" target="_blank" rel="noopener">PDF</a> shows every matrix multiplication, the uncertainty ellipses, one more full cycle, and the derivation of the matrix gain.</p>
+                                </div>
+                            </aside>
+                        </section>
+
+                        <!-- limits -->
+                        <section id="limits-and-variations">
+                            <h2>Limits and variations</h2>
+                            <p><strong>The system must be linear.</strong> A bell curve passed through a straight-line function stays a bell curve; a curved function distorts it. For nonlinear systems (turning vehicles, radar measuring range and angle):</p>
+                            <ul>
+                                <li><strong>Extended Kalman Filter (EKF):</strong> approximates the system with a straight line around the current estimate.</li>
+                                <li><strong>Unscented Kalman Filter (UKF):</strong> sends a few carefully chosen points through the real nonlinear function.</li>
+                                <li><strong>Particle filter:</strong> uses a large cloud of samples when one bell curve can't describe the uncertainty.</li>
+                            </ul>
+                            <p><strong>The noise levels must be realistic.</strong> If we claim the model is perfect (\(q = 0\)), the variance keeps shrinking and the gain heads to zero. With \(P_0 = 100\) and \(r = 12\), after 100 steps \(K \approx 0.01\): the filter accepts only 1% of each surprise and drifts away from reality while becoming more confident that it's right.</p>
+                            <ul class="duo">
+                                <li>\(Q\) too small: overconfident, ignores the sensor, lags behind real changes.</li>
+                                <li>\(Q\) too large: trusts every noisy reading, estimate becomes jittery.</li>
+                            </ul>
+                        </section>
+
+                        <!-- cheat sheet -->
+                        <section id="cheat-sheet">
+                            <h2>Cheat sheet</h2>
+                            <div class="table-wrap">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th></th><th>1-D</th><th>Matrix form</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Predict state</th><td>\(x^- = x + v\Delta t\)</td><td>\(\hat{\mathbf{x}}^- = F\hat{\mathbf{x}}\)</td></tr>
+                                        <tr><th scope="row">Predict uncertainty</th><td>\(P^- = P + q\)</td><td>\(P^- = FPF^\top + Q\)</td></tr>
+                                        <tr><th scope="row">Gain</th><td>\(K = \dfrac{P^-}{P^- + r}\)</td><td>\(K = P^-H^\top(HP^-H^\top + R)^{-1}\)</td></tr>
+                                        <tr><th scope="row">Update state</th><td>\(x = x^- + K(z - x^-)\)</td><td>\(\hat{\mathbf{x}} = \hat{\mathbf{x}}^- + K(\mathbf{z} - H\hat{\mathbf{x}}^-)\)</td></tr>
+                                        <tr><th scope="row">Update uncertainty</th><td>\(P = (1 - K)P^-\)</td><td>\(P = (I - KH)P^-\)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>Underneath all the matrices, the Kalman filter does the same thing over and over: it keeps track of what it believes, how uncertain that belief is, and how reliable each new piece of information is. Then it uses that uncertainty to decide how much weight each source deserves.</p>
+                        </section>
+
+                        <!-- go deeper -->
+                        <section id="go-deeper" class="cta-section">
+                            <div class="cta">
+                                <p>📄 <strong>Go deeper:</strong> <a href="Kalman_Filter_Notes.pdf" target="_blank" rel="noopener">Download the full Kalman Filter notes (PDF)</a> for all figures, complete derivations, the matrix Kalman gain proof, six practice problems with full solutions, and Python code.</p>
+                                <a class="btn-ink" href="Kalman_Filter_Notes.pdf" download><span class="ion-ios-download-outline"></span>Download PDF notes</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="article-foot">
+                        <ul class="pub-links">
+                            <li><a href="index.html">&larr; all posts</a></li>
+                        </ul>
+                        <ul class="pub-links">
+                            <li><a href="Kalman_Filter_Notes.pdf" target="_blank" rel="noopener">pdf notes (24 pages)</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <aside class="article-aside" aria-label="On this page">
+                    <p class="toc-label">On this page</p>
+                    <ol class="toc">
+                        <li><a href="#the-problem">Two imperfect sources</a></li>
+                        <li><a href="#bell-curve">Uncertainty as a bell curve</a></li>
+                        <li><a href="#worked-example">A worked example</a></li>
+                        <li><a href="#where-the-gain-comes-from">Where the gain comes from</a></li>
+                        <li><a href="#predict-update-loop">The predict–update loop</a></li>
+                        <li><a href="#position-and-velocity">Position and velocity</a></li>
+                        <li><a href="#limits-and-variations">Limits and variations</a></li>
+                        <li><a href="#cheat-sheet">Cheat sheet</a></li>
+                        <li><a href="#go-deeper">Go deeper</a></li>
+                    </ol>
+                    <div class="toc-card">
+                        <p><strong>📄 The full notes</strong>The complete PDF notes (24 pages) include all figures, every derivation step, full matrix arithmetic, the matrix-gain derivation, six practice problems with solutions, and Python code.</p>
+                        <a class="btn-ink" href="Kalman_Filter_Notes.pdf" download><span class="ion-ios-download-outline"></span>Download PDF</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Contact -->
+            <div class="row">
+                <div class="col-md-12 section" id="contact">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-note">Happy to talk about research, collaborations, or anything in the papers above.
+                        Email is the fastest way to reach me.</p>
+
+                    <div class="contact-block">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="contact-panel">
+                                    <h3>Send a message</h3>
+                                    <form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
+                                        class="contact-form">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" name="name" placeholder="Your name" required>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="email" name="email" placeholder="Your email" required>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="subject" placeholder="Subject" required>
+                                        <textarea name="message" rows="7" placeholder="Your message" required></textarea>
+                                        <button type="submit" class="btn-contact">
+                                            <span class="ion-ios-paperplane"></span>Send Message
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="contact-panel">
+                                    <h3>Contact details</h3>
+                                    <ul class="contact-details">
+                                        <li>
+                                            <span class="ci ion-ios-email"></span>
+                                            <span>
+                                                <span class="cd-label">Email</span>
+                                                <span class="cd-value"><a href="mailto:msayeedi212049@bscse.uiu.ac.bd">msayeedi212049@bscse.uiu.ac.bd</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-email-outline"></span>
+                                            <span>
+                                                <span class="cd-label">Secondary email</span>
+                                                <span class="cd-value"><a href="mailto:faiyazabdullah114708@gmail.com">faiyazabdullah114708@gmail.com</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-telephone"></span>
+                                            <span>
+                                                <span class="cd-label">Phone</span>
+                                                <span class="cd-value"><a href="tel:+8801704054900">+880 1704 054900</a></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="ci ion-ios-location"></span>
+                                            <span>
+                                                <span class="cd-label">Location</span>
+                                                <span class="cd-value">Dhaka, Bangladesh</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>Find me online</h3>
+                                    <ul class="profile-links">
+                                        <li><a href="https://scholar.google.com/citations?user=gLTfVpwAAAAJ&hl=en" target="_blank"
+                                                rel="noopener">Google Scholar</a></li>
+                                        <li><a href="https://github.com/faiyazabdullah" target="_blank" rel="noopener">GitHub</a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/in/mdfaiyazabdullahsayeedi/" target="_blank"
+                                                rel="noopener">LinkedIn</a></li>
+                                        <li><a href="https://orcid.org/0009-0007-3079-7806" target="_blank"
+                                                rel="noopener">ORCID</a></li>
+                                        <li><a href="https://www.researchgate.net/profile/Md-Sayeedi" target="_blank"
+                                                rel="noopener">ResearchGate</a></li>
+                                        <li><a href="https://www.facebook.com/faiyazabdullah336908" target="_blank"
+                                                rel="noopener">Facebook</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- footer -->
+    <footer id="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2026 Md. Faiyaz Abdullah Sayeedi. Powered by <a
+                href="https://github.com/UIU-Developers-Hub">@UIU Developers Hub</a>. Hosted by GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <button type="button" id="back-to-top" aria-label="Back to top"><span class="ion-chevron-up"></span></button>
+
+    <!-- mobile menu -->
+    <div class="overlay" id="site-menu">
+        <button type="button" class="overlay-close" aria-label="Close menu"><span class="ion-ios-close-empty"></span></button>
+        <nav aria-label="Mobile">
+            <ul>
+                <li><a href="../index.html">About</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../datasets.html">Datasets</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a class="current" href="index.html">Blog</a></li>
+                <li><a href="../curriculumvita.html">CV</a></li>
+                <li><a href="../honor_achievement.html">Awards</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <!-- render the \( inline \) and \[ display \] math in the article -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.renderMathInElement) { return; }
+            renderMathInElement(document.querySelector('.article'), {
+                delimiters: [
+                    { left: '\\[', right: '\\]', display: true },
+                    { left: '\\(', right: '\\)', display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+
+</html>
