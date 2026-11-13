@@ -1229,6 +1229,26 @@ a.section-more:focus {
 	color: #555;
 }
 
+/* a news item that lists several papers: [1], [2], ... with a hanging indent */
+.news-papers {
+	display: block;
+	margin-top: 4px;
+}
+
+.news-paper {
+	position: relative;
+	display: block;
+	padding: 2px 0 2px 26px;
+}
+
+.news-num {
+	position: absolute;
+	left: 0;
+	top: 2px;
+	font-weight: 500;
+	color: var(--subtle);
+}
+
 .interest-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1663,12 +1683,6 @@ a.section-more:focus {
 	font-weight: 500;
 	color: #000;
 	border-bottom: 1px solid #ccc;
-}
-
-.pub-authors .eq {
-	font-size: 12px;
-	font-style: italic;
-	color: #888;
 }
 
 .pub-venue {
