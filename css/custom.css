@@ -1787,6 +1787,60 @@ a.cite:focus,
 	display: none;
 }
 
+/* dataset fact sheet: key–value rows inside the details panel */
+.ds-details {
+	padding: 4px 18px;
+}
+
+.ds-facts {
+	display: grid;
+	grid-template-columns: 150px minmax(0, 1fr);
+	margin: 0;
+}
+
+.ds-facts dt,
+.ds-facts dd {
+	padding: 9px 0;
+	border-bottom: 1px dashed var(--line);
+}
+
+.ds-facts dt:last-of-type,
+.ds-facts dd:last-of-type {
+	border-bottom: 0;
+}
+
+.ds-facts dt {
+	padding-right: 16px;
+	font-size: var(--fs-2xs);
+	font-weight: 600;
+	line-height: 2;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--subtle);
+}
+
+.ds-facts dd {
+	margin: 0;
+	font-size: var(--fs-md);
+	line-height: 1.65;
+	color: var(--text);
+}
+
+@media (max-width: 600px) {
+	.ds-facts {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.ds-facts dt {
+		padding: 9px 0 0;
+		border-bottom: 0;
+	}
+
+	.ds-facts dd {
+		padding-top: 2px;
+	}
+}
+
 @media (max-width: 767px) {
 	.pub-item {
 		flex-direction: column;
