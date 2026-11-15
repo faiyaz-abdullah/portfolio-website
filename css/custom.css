@@ -1733,6 +1733,15 @@ a.cite:focus,
 	border-bottom-color: var(--accent);
 }
 
+/* second line under a short title, e.g. what a dataset is */
+.pub-subtitle {
+	margin: -2px 0 6px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.55;
+	color: var(--text);
+}
+
 .pub-authors {
 	margin: 0 0 4px;
 	font-size: var(--fs-md);
