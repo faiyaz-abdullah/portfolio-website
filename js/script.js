@@ -8,7 +8,6 @@
  *   4. Abstract / details toggles
  *   5. Blog: reading progress and contents highlight
  *   6. Blog: math rendering (pages that load KaTeX)
- *   7. Contact form: sends the message over HTTPS
  */
 (function () {
     'use strict';
@@ -146,63 +145,4 @@
             });
         });
     }
-
-    // 7. Contact form: <form data-contact-form action="https://formsubmit.co/...">
-    //    The message is sent straight to my inbox over HTTPS (through FormSubmit), so the
-    //    visitor needs no mail app. Without JavaScript the form still posts to the same
-    //    HTTPS address. Server replies are shown with textContent, never as HTML.
-    [].forEach.call(document.querySelectorAll('form[data-contact-form]'), function (form) {
-        var status = form.querySelector('.form-status');
-        var button = form.querySelector('button');
-        var endpoint = form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
-        var failed = 'Sorry, your message could not be sent. Please try again, or email me directly.';
-
-        if (!window.fetch || endpoint === form.action) { return; }
-
-        var show = function (message, state) {
-            if (!status) { return; }
-            status.textContent = message;
-            status.className = 'form-status' + (state ? ' is-' + state : '');
-            status.hidden = false;
-        };
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            if (button && button.disabled) { return; }
-
-            var data = {};
-            [].forEach.call(form.elements, function (field) {
-                if (field.name) { data[field.name] = field.value.trim(); }
-            });
-
-            // the hidden spam trap was filled in, so this is a bot: drop it quietly
-            if (data._honey) {
-                form.reset();
-                show('Thanks! Your message has been sent.', 'ok');
-                return;
-            }
-
-            data._subject = 'Website message: ' + data.subject;
-            if (button) { button.disabled = true; }
-            show('Sending your message…', '');
-
-            fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(data)
-            })
-                .then(function (response) {
-                    return response.json().catch(function () { return {}; }).then(function (reply) {
-                        if (response.ok && String(reply.success) === 'true') {
-                            form.reset();
-                            show('Thanks! Your message has been sent. I will get back to you soon.', 'ok');
-                        } else {
-                            show(reply.message || failed, 'error');
-                        }
-                    });
-                })
-                .catch(function () { show(failed, 'error'); })
-                .then(function () { if (button) { button.disabled = false; } });
-        });
-    });
 })();

@@ -247,7 +247,6 @@ p {
 
 /* solid buttons */
 .btn-cv,
-.btn-contact,
 .btn-ink {
 	display: inline-block;
 	padding: 11px 24px;
@@ -265,8 +264,6 @@ p {
 
 .btn-cv:hover,
 .btn-cv:focus,
-.btn-contact:hover,
-.btn-contact:focus,
 .btn-ink:hover,
 .btn-ink:focus {
 	color: #fff;
@@ -274,7 +271,6 @@ p {
 	border-color: var(--accent);
 }
 
-.btn-contact [class^="ion-"],
 .btn-ink [class^="ion-"] {
 	margin-right: 8px;
 	font-size: 15px;
@@ -2084,7 +2080,6 @@ a.cite:focus,
 }
 
 .contact-panel {
-	height: 100%;
 	padding: 26px 28px;
 	background: var(--surface);
 	border: 1px solid var(--line);
@@ -2099,97 +2094,47 @@ a.cite:focus,
 	color: var(--ink);
 }
 
-.contact-block .contact-form input,
-.contact-block .contact-form textarea {
-	width: 100%;
-	margin-bottom: 12px;
-	padding: 11px 14px;
-	font-family: var(--font-sans);
-	font-size: 14px;
-	line-height: 1.5;
-	color: var(--ink);
-	background: var(--bg);
-	border: 1px solid var(--line);
-	border-radius: var(--radius-sm);
-	transition: border-color 0.25s linear, box-shadow 0.25s linear, background-color 0.25s linear;
+/* one wide card: contact details on the left, profile links on the right */
+.contact-wide {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	column-gap: 40px;
 }
 
-.contact-block .contact-form textarea {
-	min-height: 140px;
-	resize: vertical;
+.contact-col-online {
+	padding-left: 40px;
+	border-left: 1px solid var(--line-soft);
 }
 
-.contact-block .contact-form input:focus,
-.contact-block .contact-form textarea:focus {
-	background: var(--surface);
-	border-color: var(--accent);
-	box-shadow: 0 0 0 3px var(--accent-tint);
-	outline: none;
+/* desktop: the six links sit in two even rows of three */
+@media (min-width: 992px) {
+	.contact-col-online .profile-links {
+		display: grid;
+		grid-template-columns: repeat(3, max-content);
+		gap: 8px 6px;
+	}
+
+	.contact-col-online .profile-links a {
+		display: block;
+		text-align: center;
+	}
 }
 
-.contact-block .contact-form input::placeholder,
-.contact-block .contact-form textarea::placeholder {
-	color: var(--subtle);
-}
-
-.btn-contact {
-	width: 100%;
-	padding: 12px 30px;
-}
-
-.btn-contact:disabled {
-	opacity: 0.6;
-	cursor: progress;
-}
-
-/* contact form: the spam trap stays off-screen; the send status shows below the button */
-.contact-form .hp-field {
-	position: absolute;
-	left: -10000px;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
-}
-
-.contact-form .form-status {
-	margin: 12px 0 0;
-	padding: 10px 14px;
-	font-family: var(--font-sans);
-	font-size: var(--fs-md);
-	line-height: 1.5;
-	color: var(--text);
-	background: var(--bg);
-	border: 1px solid var(--line);
-	border-radius: var(--radius-sm);
-}
-
-.contact-form .form-status.is-ok {
-	color: #166534;
-	background: #f0f7f1;
-	border-color: rgba(34, 197, 94, 0.3);
-}
-
-.contact-form .form-status.is-error {
-	color: var(--accent);
-	background: var(--accent-tint);
-	border-color: var(--accent-line);
-}
-
+/* the four details sit in a 2 x 2 grid (emails in the first column) */
 .contact-details {
-	margin: 0 0 26px;
+	display: grid;
+	grid-template-rows: repeat(2, auto);
+	grid-auto-flow: column;
+	gap: 18px 40px;
+	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
 .contact-details li {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	gap: 12px;
-	padding: 0 0 14px;
-}
-
-.contact-details li:last-child {
-	padding-bottom: 0;
 }
 
 .contact-details .ci {
@@ -2231,32 +2176,32 @@ a.cite:focus,
 	color: var(--ink);
 }
 
-/* equal-height contact panels on desktop */
-@media (min-width: 992px) {
-	.contact-block > .row {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.contact-block > .row > [class*="col-md-"] {
-		display: flex;
-	}
-
-	.contact-block > .row > [class*="col-md-"] > .contact-panel {
-		width: 100%;
-	}
-}
-
+/* tablet: the links move under the details */
 @media (max-width: 991px) {
-	.contact-panel {
-		height: auto;
-		margin-bottom: 16px;
+	.contact-wide {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 22px;
+	}
+
+	.contact-col-online {
+		padding: 22px 0 0;
+		border-left: 0;
+		border-top: 1px solid var(--line-soft);
 	}
 }
 
 @media (max-width: 767px) {
 	.contact-panel {
 		padding: 20px 18px;
+	}
+}
+
+/* phone: one detail per row */
+@media (max-width: 559px) {
+	.contact-details {
+		grid-template-rows: none;
+		grid-auto-flow: row;
+		row-gap: 14px;
 	}
 }
 
