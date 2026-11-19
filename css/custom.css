@@ -2194,11 +2194,11 @@ a.cite:focus,
 	border-left: 1px solid var(--line-soft);
 }
 
-/* desktop: the six links sit in two even rows of three */
-@media (min-width: 992px) {
+/* desktop: the twelve links sit in three even rows of four */
+@media (min-width: 1200px) {
 	.contact-col-online .profile-links {
 		display: grid;
-		grid-template-columns: repeat(3, max-content);
+		grid-template-columns: repeat(4, minmax(max-content, 1fr));
 		gap: 8px 6px;
 	}
 
@@ -2264,8 +2264,8 @@ a.cite:focus,
 	color: var(--ink);
 }
 
-/* tablet: the links move under the details */
-@media (max-width: 991px) {
+/* laptop and smaller: the links move under the details */
+@media (max-width: 1199px) {
 	.contact-wide {
 		grid-template-columns: minmax(0, 1fr);
 		row-gap: 22px;
