@@ -1380,6 +1380,54 @@ a.cite:focus,
 	}
 }
 
+/* with JavaScript the script moves the strip instead (so the buttons can steer it) */
+.collab-marquee.is-js .collab-track {
+	animation: none;
+	will-change: transform;
+}
+
+/* previous / pause-play / next buttons under the strip */
+.collab-controls {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 16px;
+}
+
+.collab-controls[hidden] {
+	display: none;
+}
+
+.collab-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	padding: 0;
+	font-size: 16px;
+	line-height: 1;
+	color: var(--text);
+	background: var(--surface);
+	border: 1px solid var(--line-strong);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background-color var(--ease), border-color var(--ease), color var(--ease);
+}
+
+.collab-btn:hover,
+.collab-btn:focus-visible,
+.collab-btn[aria-pressed="true"] {
+	color: var(--accent);
+	background: var(--accent-tint);
+	border-color: var(--accent);
+}
+
+.collab-btn:focus-visible {
+	outline: 2px solid var(--accent-line);
+	outline-offset: 2px;
+}
+
 .collab-list {
 	display: flex;
 	gap: 14px;
@@ -3063,14 +3111,15 @@ a.cite:focus,
 		transition-delay: 0s !important;
 	}
 
-	/* collaborators: no drifting; one copy of the cards that can be scrolled sideways */
-	.collab-marquee {
+	/* collaborators without JavaScript: no drifting; one copy of the cards to scroll sideways
+	   (with JavaScript the strip starts paused and the arrow buttons step through it) */
+	.collab-marquee:not(.is-js) {
 		overflow-x: auto;
 		-webkit-mask-image: none;
 		mask-image: none;
 	}
 
-	.collab-list[aria-hidden="true"] {
+	.collab-marquee:not(.is-js) .collab-list[aria-hidden="true"] {
 		display: none;
 	}
 }

@@ -8,6 +8,7 @@
  *   4. Abstract / details toggles
  *   5. Blog: reading progress and contents highlight
  *   6. Blog: math rendering (pages that load KaTeX)
+ *   7. Home: collaborators strip (drift, pause/play, previous/next)
  */
 (function () {
     'use strict';
@@ -144,5 +145,94 @@
                 throwOnError: false
             });
         });
+    }
+
+    // 7. Home: collaborators strip. The cards drift right to left; the buttons pause/play
+    //    it and step one card back or forward. The list is in the track twice, so the
+    //    position wraps around one list's width and the loop never shows a seam.
+    //    Without this script the CSS animation drifts the strip and the buttons stay hidden.
+    var strip = document.querySelector('.collab-marquee');
+    var stripControls = document.querySelector('.collab-controls');
+
+    if (strip && stripControls && window.requestAnimationFrame) {
+        var track = strip.querySelector('.collab-track');
+        var firstList = track.querySelector('.collab-list');
+        var pauseButton = stripControls.querySelector('[data-collab="pause"]');
+        var pauseIcon = pauseButton.querySelector('span');
+        var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        var speed = 40;                 // drift speed, px per second
+        var offset = 0;                 // how far the track has moved left, px
+        var playing = !reducedMotion;   // reduced motion: start paused, step with the arrows
+        var hovering = false;
+        var glide = null;               // set while an arrow button moves the strip
+        var lastTime = null;
+        var frameId = null;
+
+        var loopWidth = function () { return firstList.getBoundingClientRect().width; };
+        var cardStep = function () {
+            var card = firstList.querySelector('.collab-card');
+            var gap = parseFloat(window.getComputedStyle(firstList).columnGap) || 0;
+            return card ? card.getBoundingClientRect().width + gap : 0;
+        };
+        var wrap = function (x) {
+            var w = loopWidth();
+            return w ? ((x % w) + w) % w : 0;
+        };
+        var draw = function () {
+            track.style.transform = 'translateX(' + (-wrap(offset)) + 'px)';
+        };
+
+        var frame = function (now) {
+            var dt = lastTime === null ? 0 : Math.min(now - lastTime, 100) / 1000;
+            lastTime = now;
+            if (glide) {
+                var t = Math.min(1, (now - glide.start) / glide.duration);
+                offset = glide.from + (glide.to - glide.from) * (1 - Math.pow(1 - t, 3));
+                if (t === 1) { glide = null; offset = wrap(offset); }
+            } else if (playing && !hovering) {
+                offset = wrap(offset + speed * dt);
+            }
+            draw();
+            frameId = window.requestAnimationFrame(frame);
+        };
+        var start = function () {
+            if (frameId === null) { lastTime = null; frameId = window.requestAnimationFrame(frame); }
+        };
+        var stop = function () {
+            if (frameId !== null) { window.cancelAnimationFrame(frameId); frameId = null; }
+        };
+
+        var setPlaying = function (on) {
+            playing = on;
+            pauseButton.setAttribute('aria-label', on ? 'Pause scrolling' : 'Resume scrolling');
+            pauseButton.setAttribute('aria-pressed', on ? 'false' : 'true');
+            pauseIcon.className = on ? 'ion-pause' : 'ion-play';
+        };
+        var move = function (direction) {
+            var to = (glide ? glide.to : offset) + direction * cardStep();
+            if (reducedMotion) { glide = null; offset = wrap(to); draw(); return; }
+            glide = { from: offset, to: to, start: window.performance.now(), duration: 450 };
+        };
+
+        stripControls.querySelector('[data-collab="prev"]').addEventListener('click', function () { move(-1); });
+        stripControls.querySelector('[data-collab="next"]').addEventListener('click', function () { move(1); });
+        pauseButton.addEventListener('click', function () { setPlaying(!playing); });
+        strip.addEventListener('mouseenter', function () { hovering = true; });
+        strip.addEventListener('mouseleave', function () { hovering = false; });
+
+        // only animate while the strip is on screen
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) { start(); } else { stop(); }
+            }).observe(strip);
+        } else {
+            start();
+        }
+
+        strip.classList.add('is-js');
+        stripControls.hidden = false;
+        setPlaying(playing);
+        draw();
     }
 })();
