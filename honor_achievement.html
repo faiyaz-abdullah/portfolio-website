@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- security: load scripts, styles and fonts only from this site and the services listed -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'">
     <title>Md. Faiyaz Abdullah Sayeedi - Awards</title>
     <link rel="icon" type="image/png" href="img/icon.png">
 
@@ -134,21 +137,26 @@
                             <div class="col-md-7">
                                 <div class="contact-panel">
                                     <h3>Send a message</h3>
-                                    <form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
-                                        class="contact-form">
+                                    <form action="https://formsubmit.co/msayeedi212049@bscse.uiu.ac.bd" method="post"
+                                        class="contact-form" data-contact-form>
+                                        <input type="hidden" name="_subject" value="New message from your website">
+                                        <input type="hidden" name="_template" value="table">
+                                        <!-- spam trap: hidden from people; bots that fill it in are ignored -->
+                                        <div class="hp-field" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <input type="text" name="name" placeholder="Your name" required>
+                                                <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" maxlength="100" required>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="email" name="email" placeholder="Your email" required>
+                                                <input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" maxlength="254" required>
                                             </div>
                                         </div>
-                                        <input type="text" name="subject" placeholder="Subject" required>
-                                        <textarea name="message" rows="7" placeholder="Your message" required></textarea>
+                                        <input type="text" name="subject" placeholder="Subject" aria-label="Subject" maxlength="150" required>
+                                        <textarea name="message" rows="7" placeholder="Your message" aria-label="Your message" maxlength="5000" required></textarea>
                                         <button type="submit" class="btn-contact">
                                             <span class="ion-ios-paperplane"></span>Send Message
                                         </button>
+                                        <p class="form-status" role="status" aria-live="polite" hidden></p>
                                     </form>
                                 </div>
                             </div>

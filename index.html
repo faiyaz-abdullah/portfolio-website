@@ -4,6 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- security: load scripts, styles and fonts only from this site and the services listed -->
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'">
 	<title>Md. Faiyaz Abdullah Sayeedi</title>
 	<meta name="description" content="Md. Faiyaz Abdullah Sayeedi - Research Assistant at BRAC University. Research on Natural Language Processing, Multilingualism, Knowledge Representation, Large Language Models, and Multimodal Machine Learning.">
 	<meta name="author" content="Md. Faiyaz Abdullah Sayeedi">
@@ -578,7 +581,7 @@
 					<p class="section-note">I believe strongly in academic outreach and actively mentor aspiring researchers from Bangladesh.</p>
 					<ul class="interest-grid mentee-grid">
 						<li>
-							<h4>Nurul Labib Sayeedi</h4>
+							<h4><a href="https://labib1610.github.io/" target="_blank" rel="noopener">Nurul Labib Sayeedi</a></h4>
 							<p class="mentee-since">Jan 2025 &ndash; Present</p>
 							<p class="mentee-papers">
 									<span class="mentee-paper"><span class="pub-tag acl" tabindex="0" data-venue="ACL 2026 Workshop on Multilinguality in the Era of Large Language Models (MeLLM @ ACL 2026)">MeLLM @ ACL 2026</span> <span class="cite-group">[<a class="cite" href="publications.html#pub-w5" title="MultiHaluDet: Multilingual Hallucination Detection via LLM Hidden State Probing">W5</a>]</span></span>
@@ -586,7 +589,7 @@
 							</p>
 						</li>
 						<li>
-							<h4>Riasad Alvi</h4>
+							<h4><a href="https://alvi-uiu.github.io/EGDR/" target="_blank" rel="noopener">Riasad Alvi</a></h4>
 							<p class="mentee-since">Feb 2025 &ndash; Present</p>
 							<p class="mentee-papers">
 									<span class="mentee-paper"><span class="pub-tag acl" tabindex="0" data-venue="ACL 2026 Workshop on Multilinguality in the Era of Large Language Models (MeLLM @ ACL 2026)">MeLLM @ ACL 2026</span> <span class="cite-group">[<a class="cite" href="publications.html#pub-w5" title="MultiHaluDet: Multilingual Hallucination Detection via LLM Hidden State Probing">W5</a>]</span></span>
@@ -595,7 +598,7 @@
 							</p>
 						</li>
 						<li>
-							<h4>Md. Asaduzzaman Shuvo</h4>
+							<h4><a href="https://ashuvo25.github.io/portfolio-asadshuvo/" target="_blank" rel="noopener">Md. Asaduzzaman Shuvo</a></h4>
 							<p class="mentee-since">Feb 2025 &ndash; Present</p>
 							<p class="mentee-papers">
 									<span class="mentee-paper"><span class="pub-tag cvf" tabindex="0" data-venue="Winter Conference on Applications of Computer Vision (WACV 2027)">WACV 2027</span> <span class="cite-group">[<a class="cite" href="publications.html#pub-c5" title="Entropy-Gated Dynamic Rectification for Object Hallucination in Large Vision-Language Models">C5</a>]</span></span>
@@ -617,21 +620,26 @@
 							<div class="col-md-7">
 								<div class="contact-panel">
 									<h3>Send a message</h3>
-									<form action="mailto:msayeedi212049@bscse.uiu.ac.bd" method="post" enctype="text/plain"
-										class="contact-form">
+									<form action="https://formsubmit.co/msayeedi212049@bscse.uiu.ac.bd" method="post"
+										class="contact-form" data-contact-form>
+										<input type="hidden" name="_subject" value="New message from your website">
+										<input type="hidden" name="_template" value="table">
+										<!-- spam trap: hidden from people; bots that fill it in are ignored -->
+										<div class="hp-field" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
 										<div class="row">
 											<div class="col-sm-6">
-												<input type="text" name="name" placeholder="Your name" required>
+												<input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" maxlength="100" required>
 											</div>
 											<div class="col-sm-6">
-												<input type="email" name="email" placeholder="Your email" required>
+												<input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" maxlength="254" required>
 											</div>
 										</div>
-										<input type="text" name="subject" placeholder="Subject" required>
-										<textarea name="message" rows="7" placeholder="Your message" required></textarea>
+										<input type="text" name="subject" placeholder="Subject" aria-label="Subject" maxlength="150" required>
+										<textarea name="message" rows="7" placeholder="Your message" aria-label="Your message" maxlength="5000" required></textarea>
 										<button type="submit" class="btn-contact">
 											<span class="ion-ios-paperplane"></span>Send Message
 										</button>
+										<p class="form-status" role="status" aria-live="polite" hidden></p>
 									</form>
 								</div>
 							</div>
