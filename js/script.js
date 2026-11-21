@@ -9,6 +9,7 @@
  *   5. Blog: reading progress and contents highlight
  *   6. Blog: math rendering (pages that load KaTeX)
  *   7. Home: collaborators strip (drift, pause/play, previous/next)
+ *   8. Home: news feed auto-scroll (hover to stop and scroll by hand)
  */
 (function () {
     'use strict';
@@ -234,5 +235,79 @@
         stripControls.hidden = false;
         setPlaying(playing);
         draw();
+    }
+
+    // 8. Home: the news feed scrolls itself slowly downward. At the bottom it waits,
+    //    glides back to the top, waits, and starts again. Hovering (or touching, or
+    //    tabbing into a link) stops it so the feed can be scrolled by hand as usual;
+    //    afterwards it carries on from wherever it was left. Off for reduced motion.
+    var feed = document.querySelector('.news-feed');
+    var feedReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (feed && !feedReduced && window.requestAnimationFrame) {
+        var feedSpeed = 22;             // px per second, a relaxed reading pace
+        var feedPos = 0;                // where the script wants the feed, px (fractional)
+        var feedWritten = 0;            // scrollTop right after the script last set it
+        var feedMode = 'wait-top';      // 'down' | 'wait-bottom' | 'to-top' | 'wait-top'
+        var feedUntil = 0;              // end of the current wait, or of the glide to the top
+        var feedGlideFrom = 0;
+        var feedHover = false, feedFocus = false, feedTouchUntil = 0;
+        var feedLast = null, feedFrame = null;
+
+        var feedFrameStep = function (now) {
+            var dt = feedLast === null ? 0 : Math.min(now - feedLast, 100) / 1000;
+            feedLast = now;
+            var max = feed.scrollHeight - feed.clientHeight;
+            if (feedUntil === 0) { feedUntil = now + 1500; }   // short pause before the first scroll
+
+            // scrolled by hand (wheel, scrollbar, keys or touch): continue from there
+            if (Math.abs(feed.scrollTop - feedWritten) > 1) {
+                feedPos = feed.scrollTop;
+                feedWritten = feed.scrollTop;
+                feedMode = 'down';
+            }
+
+            var held = feedHover || feedFocus || now < feedTouchUntil;
+            if (max > 0 && !held) {
+                if (feedMode === 'down') {
+                    feedPos = Math.min(max, feedPos + feedSpeed * dt);
+                    if (feedPos >= max) { feedMode = 'wait-bottom'; feedUntil = now + 2500; }
+                } else if (feedMode === 'wait-bottom' && now >= feedUntil) {
+                    feedMode = 'to-top'; feedGlideFrom = feedPos; feedUntil = now + 1400;
+                } else if (feedMode === 'to-top') {
+                    var t = Math.min(1, 1 - (feedUntil - now) / 1400);
+                    feedPos = feedGlideFrom * (1 - (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2));
+                    if (t >= 1) { feedPos = 0; feedMode = 'wait-top'; feedUntil = now + 2000; }
+                } else if (feedMode === 'wait-top' && now >= feedUntil) {
+                    feedMode = 'down';
+                }
+                feed.scrollTop = feedPos;
+                feedWritten = feed.scrollTop;
+            }
+            feedFrame = window.requestAnimationFrame(feedFrameStep);
+        };
+        var feedStart = function () {
+            if (feedFrame === null) { feedLast = null; feedFrame = window.requestAnimationFrame(feedFrameStep); }
+        };
+        var feedStop = function () {
+            if (feedFrame !== null) { window.cancelAnimationFrame(feedFrame); feedFrame = null; }
+        };
+
+        feed.addEventListener('mouseenter', function () { feedHover = true; });
+        feed.addEventListener('mouseleave', function () { feedHover = false; });
+        feed.addEventListener('focusin', function () { feedFocus = true; });
+        feed.addEventListener('focusout', function () { feedFocus = false; });
+        feed.addEventListener('touchstart', function () { feedTouchUntil = Infinity; }, { passive: true });
+        var feedTouchEnd = function () { feedTouchUntil = window.performance.now() + 4000; };
+        feed.addEventListener('touchend', feedTouchEnd, { passive: true });
+        feed.addEventListener('touchcancel', feedTouchEnd, { passive: true });
+
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) { feedStart(); } else { feedStop(); }
+            }).observe(feed);
+        } else {
+            feedStart();
+        }
     }
 })();
